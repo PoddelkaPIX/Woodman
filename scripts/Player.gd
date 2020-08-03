@@ -9,6 +9,7 @@ var velocity = Vector2()
 var direction = 1
 var spin = false
 var jump = false
+var management = true
 var kick = false
 var attack = false
 var hit = false
@@ -18,7 +19,7 @@ var cd_attack = 0
 onready var Anim = $AnimationPlayer
 
 func _physics_process(delta):
-	cd_spin -= 1
+	cd_spin -= 1 * delta
 	cd_attack -= 1
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		print(G.E_pressed)
@@ -80,7 +81,7 @@ func animation():
 	var anim
 	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
 		anim = 'jump'
-	elif velocity.y > 0 and attack == false and kick == false and spin == false:
+	elif jump == false and not is_on_floor() and attack == false and kick == false and spin == false:
 		anim = 'fall'
 	else:
 		if spin == true:
@@ -106,9 +107,9 @@ func _kick_end():
 	$Area2D/kick.disabled = true
 
 func _spin_end():
-	cd_spin = 15
-	if is_on_floor():
-		spin = false
+	spin = false
+	#Anim.play('idle')
+	cd_spin = 1
 	$PlayerHitbox.disabled = false
 	if is_on_floor():
 		velocity.x = 0
