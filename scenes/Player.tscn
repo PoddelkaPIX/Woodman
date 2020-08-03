@@ -232,4 +232,10 @@ anims/spin = SubResource( 11 )
 
 [node name="looting_timer" type="Timer" parent="."]
 wait_time = 0.1
+one_shot = true
+
+[node name="gravity_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 [connection signal="timeout" from="looting_timer" to="." method="_on_looting_timer_timeout"]
+[connection signal="timeout" from="gravity_timer" to="." method="_on_gravity_timer_timeout"]

@@ -15,8 +15,10 @@ var attack = false
 var hit = false
 var cd_spin = 0
 var cd_attack = 0
+var inventory = {}
 
 onready var Anim = $AnimationPlayer
+
 
 func _physics_process(delta):
 	cd_spin -= 1 * delta
