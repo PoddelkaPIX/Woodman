@@ -17,6 +17,8 @@ var cd_attack = 0
 
 onready var Anim = $AnimationPlayer
 
+# комментарий
+
 func _physics_process(delta):
 	cd_spin -= 1
 	cd_attack -= 1
