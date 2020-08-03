@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
 const JUMP = 350
-const GRAVITY = 10
 const FLOOR = Vector2(0, -1)
 
+var GRAVITY = 10
 var speed_limit = 250
 var velocity = Vector2()
 var direction = 1
@@ -21,6 +21,9 @@ onready var Anim = $AnimationPlayer
 func _physics_process(delta):
 	cd_spin -= 1 * delta
 	cd_attack -= 1
+	if is_on_floor():
+		GRAVITY = 10
+	
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		G.E_pressed = true
 		$looting_timer.start()
@@ -46,6 +49,7 @@ func _physics_process(delta):
 		direction = 1
 	
 	if Input.is_action_pressed("ui_up") and is_on_floor():
+		$gravity_timer.start()
 		jump = true
 		velocity.y = -JUMP
 	else:
@@ -108,7 +112,6 @@ func _kick_end():
 
 func _spin_end():
 	spin = false
-	#Anim.play('idle')
 	cd_spin = 1
 	$PlayerHitbox.disabled = false
 	if is_on_floor():
@@ -122,8 +125,8 @@ func _attack_end():
 func _jump_end():
 	jump = false
 
-
-
-
 func _on_looting_timer_timeout():
 	G.E_pressed = false
+
+func _on_gravity_timer_timeout():
+	GRAVITY = 15
