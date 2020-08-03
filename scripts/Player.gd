@@ -21,9 +21,11 @@ onready var Anim = $AnimationPlayer
 func _physics_process(delta):
 	cd_spin -= 1 * delta
 	cd_attack -= 1
+	
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		G.E_pressed = true
 		$looting_timer.start()
+	
 	if Input.is_action_just_pressed("ui_accept") and cd_attack <= 0:
 		attack = true
 	elif Input.is_action_just_pressed("ui_select") and cd_attack <= 0:
@@ -79,6 +81,7 @@ func _physics_process(delta):
 
 func animation():
 	var anim
+	
 	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
 		anim = 'jump'
 	elif jump == false and not is_on_floor() and attack == false and kick == false and spin == false:
@@ -108,7 +111,6 @@ func _kick_end():
 
 func _spin_end():
 	spin = false
-	#Anim.play('idle')
 	cd_spin = 1
 	$PlayerHitbox.disabled = false
 	if is_on_floor():
@@ -121,9 +123,6 @@ func _attack_end():
 
 func _jump_end():
 	jump = false
-
-
-
 
 func _on_looting_timer_timeout():
 	G.E_pressed = false

@@ -1,5 +1,7 @@
 extends Node2D
 
+func _ready():
+	OS.center_window()
 func _process(delta):
 	G.player_position = $Player.position
 
