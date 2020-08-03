@@ -108,9 +108,9 @@ func _kick_end():
 func _spin_end():
 	cd_spin = 15
 	spin = false
+	$PlayerHitbox.disabled = false
 	if is_on_floor():
 		velocity.x = 0
-	$PlayerHitbox.disabled = false
 
 func _attack_end():
 	cd_attack = 4
