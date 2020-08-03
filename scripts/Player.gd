@@ -17,8 +17,6 @@ var cd_attack = 0
 
 onready var Anim = $AnimationPlayer
 
-# комментарий
-
 func _physics_process(delta):
 	cd_spin -= 1
 	cd_attack -= 1
@@ -80,7 +78,7 @@ func _physics_process(delta):
 
 func animation():
 	var anim
-	if jump == true and attack == false and kick == false and spin == false:
+	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
 		anim = 'jump'
 	elif velocity.y > 0 and attack == false and kick == false and spin == false:
 		anim = 'fall'
@@ -109,7 +107,8 @@ func _kick_end():
 
 func _spin_end():
 	cd_spin = 15
-	spin = false
+	if is_on_floor():
+		spin = false
 	$PlayerHitbox.disabled = false
 	if is_on_floor():
 		velocity.x = 0
