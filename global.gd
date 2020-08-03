@@ -1,4 +1,4 @@
 extends Node
 
-
-var E_pressed
+var player_position
+var E_pressed = false

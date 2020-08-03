@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ground/ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ground/tree.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Level_1.gd" type="Script" id=4]
-[ext_resource path="res://sprites/axe.png" type="Texture" id=5]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13, 15 )
+[ext_resource path="res://scenes/Axe_item.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 106 )
@@ -30,20 +27,18 @@ position = Vector2( 803, 545 )
 [node name="StaticBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( -123, 545 )
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 492, 341 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -4, -2 )
-shape = SubResource( 1 )
-
-[node name="axe" type="Sprite" parent="Area2D"]
-texture = ExtResource( 5 )
-
 [node name="Area2D2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2( -298, 260 )
 shape = SubResource( 2 )
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+
+[node name="Axe_item" parent="." instance=ExtResource( 5 )]
+position = Vector2( 186.269, 348.432 )
+
+[node name="Axe_item2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 228.144, 264.871 )
+
+[node name="Axe_item3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 283.143, 359.039 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]
