@@ -20,7 +20,7 @@ z_index = 2
 texture = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 973.883, 204.139 )
+position = Vector2( 893.014, 171.561 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 803, 545 )
@@ -40,6 +40,7 @@ position = Vector2( 1561.65, 697.099 )
 rotation = -1.5708
 
 [node name="Area2D2" type="Area2D" parent="."]
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2( -298, 260 )

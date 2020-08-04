@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
 const JUMP = 350
-const GRAVITY = 10
 const FLOOR = Vector2(0, -1)
 
+var GRAVITY = 10
 var speed_limit = 250
 var velocity = Vector2()
 var direction = 1
@@ -35,7 +35,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0:
 		spin = true
-		$PlayerHitbox.disabled = true
+		set_collision_mask(1)
 	elif Input.is_action_pressed("ui_left") and spin == false:
 		if velocity.x >= - speed_limit:
 			velocity.x -= 15
@@ -50,11 +50,15 @@ func _physics_process(delta):
 		direction = 1
 	
 	if Input.is_action_pressed("ui_up") and is_on_floor():
+		$gravity_timer.start()
 		jump = true
 		velocity.y = -JUMP
 	else:
 		if Input.is_action_just_released("ui_up") and velocity.y < -JUMP/2:
 			velocity.y = -JUMP/2
+	
+	if is_on_floor():
+		GRAVITY = 10
 	
 	if spin == true:
 		if direction == 1:
@@ -112,9 +116,9 @@ func _kick_end():
 	$Area_kick/kick.disabled = true
 
 func _spin_end():
+	set_collision_mask(5)
 	spin = false
 	cd_spin = 1
-	$PlayerHitbox.disabled = false
 	if is_on_floor():
 		velocity.x = 0
 
@@ -129,15 +133,16 @@ func _jump_end():
 func _on_looting_timer_timeout():
 	G.E_pressed = false
 
-
 func _on_Area_Attack_body_entered(body):
 	if 'enemy' in body.name:
 		print('hit')
 		body.health -= 5
-
 
 func _on_Area_kick_body_entered(body):
 	if 'enemy' in body.name:
 		body.velocity.y = 400
 		print('kick')
 		body.health -= 1
+
+func _on_gravity_timer_timeout():
+	GRAVITY = 15
