@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/stump.png" type="Texture" id=1]
+[ext_resource path="res://scripts/stump.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 20.0569
+height = 0.0
+
+[node name="enemy_stump" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="enemy_hitBox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="RayCast_legs" type="RayCast2D" parent="."]
+position = Vector2( 11.3164, 17.7157 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="RayCast_opinion" type="RayCast2D" parent="."]
+position = Vector2( 19.8208, 1.96674 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="stump" type="Sprite" parent="."]
+position = Vector2( 1.0284, -11.1447 )
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = -7.21417
+margin_top = -34.7194
+margin_right = 6.78583
+margin_bottom = -19.7194
+__meta__ = {
+"_edit_use_anchors_": false
+}

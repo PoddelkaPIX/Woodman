@@ -18,20 +18,20 @@ var cd_attack = 0
 var inventory = {}
 
 onready var Anim = $AnimationPlayer
-
+onready var ui = get_viewport().get_node("res://scenes/UI.tscn")
 
 func _physics_process(delta):
 	cd_spin -= 1 * delta
-	cd_attack -= 1
+	cd_attack -= 0.1 
 	
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		G.E_pressed = true
 		$looting_timer.start()
 	
-	if Input.is_action_just_pressed("ui_accept") and cd_attack <= 0:
-		attack = true
-	elif Input.is_action_just_pressed("ui_select") and cd_attack <= 0:
+	if Input.is_action_just_pressed("ui_select") and cd_attack <= 0:
 		kick = true
+	elif Input.is_action_just_pressed("ui_accept") and cd_attack <= 0:
+		attack = true
 	
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0:
 		spin = true
@@ -62,19 +62,19 @@ func _physics_process(delta):
 		else:
 			velocity.x = - 400
 	elif attack == true:
-		$Area2D/attack.disabled = false
+		$Area_Attack/attack.disabled = false
 	elif kick == true:
-		$Area2D/kick.disabled = false
+		$Area_kick/kick.disabled = false
 	
 	if direction == 1:
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x) * -1
-		$Area2D/attack.position.x = abs($Area2D/attack.position.x)
-		$Area2D/kick.position.x = abs($Area2D/kick.position.x)
+		$Area_Attack/attack.position.x = abs($Area_Attack/attack.position.x)
+		$Area_kick/kick.position.x = abs($Area_kick/kick.position.x)
 		$Sprite.flip_h = false
 	else:
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x)
-		$Area2D/attack.position.x = abs($Area2D/attack.position.x) * -1
-		$Area2D/kick.position.x = abs($Area2D/kick.position.x) * -1
+		$Area_Attack/attack.position.x = abs($Area_Attack/attack.position.x) * -1
+		$Area_kick/kick.position.x = abs($Area_kick/kick.position.x) * -1
 		$Sprite.flip_h = true
 	
 	velocity.y += GRAVITY
@@ -107,9 +107,9 @@ func animation():
 		Anim.play(anim)
 
 func _kick_end():
-	cd_attack = 4
+	cd_attack = 0.5
 	kick = false
-	$Area2D/kick.disabled = true
+	$Area_kick/kick.disabled = true
 
 func _spin_end():
 	spin = false
@@ -119,12 +119,24 @@ func _spin_end():
 		velocity.x = 0
 
 func _attack_end():
-	cd_attack = 4
+	cd_attack = 0.5
 	attack = false
-	$Area2D/attack.disabled = true
+	$Area_Attack/attack.disabled = true
 
 func _jump_end():
 	jump = false
 
 func _on_looting_timer_timeout():
 	G.E_pressed = false
+
+
+func _on_Area_Attack_body_entered(body):
+	if 'enemy' in body.name:
+		print('hit')
+		body.health -= 5
+
+
+func _on_Area_kick_body_entered(body):
+	if 'enemy' in body.name:
+		print('kick')
+		body.health -= 1
