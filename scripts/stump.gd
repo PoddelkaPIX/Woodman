@@ -16,7 +16,7 @@ func _physics_process(delta):
 	if health <= 0:
 		queue_free()
 		
-	if is_alive == true and move == true:
+	if is_alive == true:
 		velocity.x = direction * SPEED
 		if $RayCast_opinion.is_colliding():
 			direction *= -1;
@@ -24,8 +24,6 @@ func _physics_process(delta):
 		elif not $RayCast_legs.is_colliding():
 			direction *= -1;
 			$stump.flip_h = bool(1-direction);
-	else:
-		velocity.x = 0
 		
 	if direction == 1:
 		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x) * -1

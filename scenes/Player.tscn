@@ -4,8 +4,8 @@
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Idle.png" type="Texture" id=13]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9, 30 )
+[sub_resource type="CapsuleShape2D" id=12]
+height = 40.5966
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.1941, 18 )
@@ -192,7 +192,7 @@ script = ExtResource( 2 )
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
-shape = SubResource( 1 )
+shape = SubResource( 12 )
 
 [node name="Area_Attack" type="Area2D" parent="."]
 
@@ -211,7 +211,6 @@ disabled = true
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.4, 0.4 )
-limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
@@ -227,7 +226,7 @@ shape = SubResource( 4 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 13 )
 hframes = 13
-frame = 7
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 5 )

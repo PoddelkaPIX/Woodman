@@ -138,5 +138,6 @@ func _on_Area_Attack_body_entered(body):
 
 func _on_Area_kick_body_entered(body):
 	if 'enemy' in body.name:
+		body.velocity.y = 400
 		print('kick')
 		body.health -= 1
