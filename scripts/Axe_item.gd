@@ -1,19 +1,17 @@
 extends Area2D
 
-var item = 'Axe'
-var amount = 1
-
-func get_item():
-	return item
+var key = 'Axe'
+var label = 'Axe'
+var desc = 'item_axe'
+var count = 1
+var icon = ''
 	
-func get_amount():
-	return amount
-	
+func action():
+	print('ACTION ', key )
 func _process(delta):
 	if (position.distance_to(G.player_position) < 50):
 		$Label.visible = true
-		print(position.distance_to(G.player_position))
 		if G.E_pressed == true:
-			queue_free()
+			action()
 	else:
 		$Label.visible = false

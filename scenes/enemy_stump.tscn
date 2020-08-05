@@ -4,8 +4,8 @@
 [ext_resource path="res://scripts/stump.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 20.0
-height = 0.0
+radius = 9.84671
+height = 10.1074
 
 [node name="enemy_stump" type="KinematicBody2D"]
 collision_layer = 4
@@ -13,18 +13,20 @@ collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="enemy_hitBox" type="CollisionShape2D" parent="."]
+position = Vector2( 0.176765, 3.88909 )
 shape = SubResource( 1 )
 
 [node name="RayCast_legs" type="RayCast2D" parent="."]
-position = Vector2( 11, 18 )
+position = Vector2( 7.81802, 16.0555 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 
 [node name="RayCast_opinion" type="RayCast2D" parent="."]
-position = Vector2( 20, 2 )
+position = Vector2( 11.5147, 2.88388 )
 rotation = -1.5708
 enabled = true
 cast_to = Vector2( 0, 10 )
+collision_mask = 7
 
 [node name="stump" type="Sprite" parent="."]
 position = Vector2( 1.028, -11 )
@@ -39,3 +41,10 @@ margin_bottom = -19.7194
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="."]
+pause_mode = 1
+process_mode = 0
+wait_time = 0.01
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

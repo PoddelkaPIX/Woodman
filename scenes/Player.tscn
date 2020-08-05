@@ -12,9 +12,9 @@ height = 42.0
 extents = Vector2( 5.1941, 18 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 18, 9 )
+extents = Vector2( 13, 9 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "attack1"
 length = 0.3
 tracks/0/type = "value"
@@ -44,7 +44,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "fall"
 loop = true
 tracks/0/type = "value"
@@ -60,7 +60,7 @@ tracks/0/keys = {
 "values": [ 17 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "idle"
 length = 1.1
 loop = true
@@ -77,7 +77,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "jump"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -106,7 +106,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "kick"
 length = 0.3
 tracks/0/type = "value"
@@ -136,7 +136,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "run"
 length = 0.8
 loop = true
@@ -153,7 +153,7 @@ tracks/0/keys = {
 "values": [ 7, 8, 9, 10, 11, 12, 13, 14 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "spin"
 length = 0.3
 tracks/0/type = "value"
@@ -204,7 +204,7 @@ disabled = true
 [node name="Area_kick" type="Area2D" parent="."]
 
 [node name="kick" type="CollisionShape2D" parent="Area_kick"]
-position = Vector2( 27, 12 )
+position = Vector2( 21.5686, 12 )
 shape = SubResource( 3 )
 disabled = true
 
@@ -223,13 +223,13 @@ texture = ExtResource( 13 )
 hframes = 20
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack1 = SubResource( 5 )
-anims/fall = SubResource( 6 )
-anims/idle = SubResource( 7 )
-anims/jump = SubResource( 8 )
-anims/kick = SubResource( 9 )
-anims/run = SubResource( 10 )
-anims/spin = SubResource( 11 )
+anims/attack1 = SubResource( 4 )
+anims/fall = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/jump = SubResource( 7 )
+anims/kick = SubResource( 8 )
+anims/run = SubResource( 9 )
+anims/spin = SubResource( 10 )
 
 [node name="looting_timer" type="Timer" parent="."]
 wait_time = 0.1

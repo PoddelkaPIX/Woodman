@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/Level_1.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Axe_item.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ground/ground.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/uu.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -40,11 +41,17 @@ position = Vector2( 1561.65, 697.099 )
 rotation = -1.5708
 
 [node name="Area2D2" type="Area2D" parent="."]
-collision_mask = 7
+collision_layer = 4
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2( -298, 260 )
 shape = SubResource( 1 )
+
+[node name="uu" type="Sprite" parent="Area2D2"]
+position = Vector2( -298, 253.374 )
+scale = Vector2( 0.174615, 3.23561 )
+texture = ExtResource( 7 )
 
 [node name="Axe_item" parent="." instance=ExtResource( 5 )]
 position = Vector2( 186.269, 348.432 )
@@ -63,4 +70,13 @@ position = Vector2( 1410.16, 216.139 )
 
 [node name="enemy_stump3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 742.399, 264.871 )
+
+[node name="enemy_stump4" parent="." instance=ExtResource( 2 )]
+position = Vector2( -87.8079, 336.289 )
+
+[node name="tree2" type="Sprite" parent="."]
+position = Vector2( 130.235, 196.42 )
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 3 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]

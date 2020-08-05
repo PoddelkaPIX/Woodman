@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
-const SPEED = 80
+const SPEED = 30
 const GRAVITY = 10
 
 var move = true
@@ -9,14 +9,21 @@ var is_alive = true
 var velocity = Vector2()
 var direction = 1
 var health = 20
-
+var toss = false
 func _physics_process(delta):
 	$Label.text = str(health)
-	
+
 	if health <= 0:
 		queue_free()
-		
-	if is_alive == true:
+	if toss == true:
+		$Timer.start()
+		if G.player_direction == 1:
+			velocity.x = 100
+			velocity.y = - 100
+		else:
+			velocity.x = - 100
+			velocity.y = - 100
+	elif is_alive == true and is_on_floor():
 		velocity.x = direction * SPEED
 		if $RayCast_opinion.is_colliding():
 			direction *= -1;
@@ -40,3 +47,8 @@ func _physics_process(delta):
 	
 	velocity.y += GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
+
+
+
+func _on_Timer_timeout():
+	toss = false

@@ -5,13 +5,13 @@
 [node name="UI" type="CanvasLayer"]
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 108.0
+margin_bottom = 80.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="axe" type="Sprite" parent="."]
+[node name="axe" type="Sprite" parent="Control"]
 position = Vector2( 59.5998, 40 )
 scale = Vector2( 2.61475, 2.61475 )
 texture = ExtResource( 1 )

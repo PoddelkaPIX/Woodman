@@ -21,6 +21,7 @@ onready var Anim = $AnimationPlayer
 onready var ui = get_viewport().get_node("res://scenes/UI.tscn")
 
 func _physics_process(delta):
+	G.player_direction = direction
 	cd_spin -= 1 * delta
 	cd_attack -= 0.1 
 	
@@ -140,7 +141,7 @@ func _on_Area_Attack_body_entered(body):
 
 func _on_Area_kick_body_entered(body):
 	if 'enemy' in body.name:
-		body.velocity.y = 400
+		body.toss = true
 		print('kick')
 		body.health -= 1
 
