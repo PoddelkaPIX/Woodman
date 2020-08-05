@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/Axe_item.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ground/ground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sprites/uu.png" type="Texture" id=7]
+[ext_resource path="res://ground/BG.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -14,9 +15,27 @@ extents = Vector2( 10, 106 )
 [node name="Level_1" type="Node2D"]
 script = ExtResource( 4 )
 
+[node name="BG" type="Sprite" parent="."]
+position = Vector2( 695.05, -182.99 )
+scale = Vector2( 1.28912, 1.28912 )
+z_index = -1
+texture = ExtResource( 8 )
+
 [node name="tree" type="Sprite" parent="."]
 position = Vector2( 336, 183 )
 scale = Vector2( 2, 2 )
+z_index = 2
+texture = ExtResource( 3 )
+
+[node name="tree3" type="Sprite" parent="."]
+position = Vector2( 377.012, 237.139 )
+scale = Vector2( -1.71274, 1.3915 )
+z_index = 2
+texture = ExtResource( 3 )
+
+[node name="tree4" type="Sprite" parent="."]
+position = Vector2( 861.014, 117.034 )
+scale = Vector2( -1.71274, 1.3915 )
 z_index = 2
 texture = ExtResource( 3 )
 
@@ -54,13 +73,20 @@ scale = Vector2( 0.174615, 3.23561 )
 texture = ExtResource( 7 )
 
 [node name="Axe_item" parent="." instance=ExtResource( 5 )]
-position = Vector2( 186.269, 348.432 )
+position = Vector2( 318.539, 307.709 )
+rotation = -2.0944
 
-[node name="Axe_item2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 228.144, 264.871 )
-
-[node name="Axe_item3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 283.143, 359.039 )
+[node name="Label2" type="Label" parent="Axe_item"]
+margin_left = 48.4894
+margin_top = -30.4202
+margin_right = 94.4894
+margin_bottom = 0.579773
+rect_rotation = 120.0
+text = "Press E
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="enemy_stump" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1189.67, 264.871 )
@@ -77,6 +103,30 @@ position = Vector2( -87.8079, 336.289 )
 [node name="tree2" type="Sprite" parent="."]
 position = Vector2( 130.235, 196.42 )
 scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="tree5" type="Sprite" parent="."]
+position = Vector2( 914.583, 123.672 )
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="tree6" type="Sprite" parent="."]
+position = Vector2( 1267, 171.561 )
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="tree7" type="Sprite" parent="."]
+position = Vector2( 1529.96, 149.834 )
+scale = Vector2( 2, 2 )
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="tree8" type="Sprite" parent="."]
+position = Vector2( -292.412, 260 )
+scale = Vector2( -2, 2 )
 z_index = -1
 texture = ExtResource( 3 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]
