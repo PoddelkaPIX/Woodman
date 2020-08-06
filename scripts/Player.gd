@@ -4,30 +4,45 @@ const JUMP = 350
 const FLOOR = Vector2(0, -1)
 
 var GRAVITY = 10
-var speed_limit = 250
+var speed_limit = 250 #ограничение по скорости игрока
 var velocity = Vector2()
 var direction = 1
 var spin = false
 var jump = false
-var management = true
 var kick = false
 var attack = false
 var hit = false
+var zoom = false
 var cd_spin = 0
 var cd_attack = 0
-var inventory = {}
+var camera_zoom_x = 0.8
+var camera_zoom_y = 0.8
+var anim
 
 onready var Anim = $AnimationPlayer
 onready var ui = get_viewport().get_node("res://scenes/UI.tscn")
 
+func _ready():
+	$camera_zoom.start()
+	$Camera2D.set_zoom(Vector2(camera_zoom_x, camera_zoom_y))
+	G.axe_is_taken = false
+	$UI/Control/axe.visible = false
+	
 func _physics_process(delta):
-	G.player_direction = direction
+	if zoom == true:
+		camera_zoom_x -= 0.5 * delta
+		camera_zoom_y -= 0.5 * delta
+		if camera_zoom_x > 0.4:
+			$Camera2D.set_zoom(Vector2(camera_zoom_x, camera_zoom_y))
+		else:
+			zoom = false
+	G.player_direction = direction  #передаём в глобальную переменную сторону взгляда игрока
 	cd_spin -= 1 * delta
 	cd_attack -= 0.1 
-	
+	 #кнопочки
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		G.E_pressed = true
-		$looting_timer.start()
+		$looting_timer.start() #длительность нажатия клавиши Е = 0.1 сек
 	
 	if Input.is_action_just_pressed("ui_select") and cd_attack <= 0:
 		kick = true
@@ -60,7 +75,7 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		GRAVITY = 10
-	
+	 #управление шейпами
 	if spin == true:
 		if direction == 1:
 			velocity.x = + 400
@@ -85,10 +100,8 @@ func _physics_process(delta):
 	velocity.y += GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
-
+ #машина состояний для анимации
 func animation():
-	var anim
-	
 	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
 		anim = 'jump'
 	elif jump == false and not is_on_floor() and attack == false and kick == false and spin == false:
@@ -108,9 +121,8 @@ func animation():
 	if anim == 'idle':
 		velocity.x = 0
 	
-	if not Anim.play(anim):
-		Anim.play(anim)
-
+	Anim.play(anim)
+#функции окончания проигрывания анимаций
 func _kick_end():
 	cd_attack = 0.5
 	kick = false
@@ -131,15 +143,18 @@ func _attack_end():
 func _jump_end():
 	jump = false
 
-func _on_looting_timer_timeout():
+func _on_looting_timer_timeout(): #таймер выключающий нажатие на Е
 	G.E_pressed = false
 
-func _on_Area_Attack_body_entered(body):
+func _on_Area_Attack_body_entered(body): #свойства атаки
 	if 'enemy' in body.name:
-		print('hit')
-		body.health -= 5
+		if G.axe_is_taken == false: #обычная атака без усиления
+			print('hit')
+			body.health -= 5
+		else: #атака с усилением
+			body.health -= 10
 
-func _on_Area_kick_body_entered(body):
+func _on_Area_kick_body_entered(body): #свойства пинка
 	if 'enemy' in body.name:
 		body.toss = true
 		print('kick')
@@ -147,3 +162,7 @@ func _on_Area_kick_body_entered(body):
 
 func _on_gravity_timer_timeout():
 	GRAVITY = 15
+
+
+func _on_camera_zoom_timeout():
+	zoom = true

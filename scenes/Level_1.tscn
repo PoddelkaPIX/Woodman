@@ -40,13 +40,16 @@ z_index = 2
 texture = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 893.014, 171.561 )
+position = Vector2( 40.3456, 336.289 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 803, 545 )
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( -123, 545 )
+
+[node name="StaticBody2D6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 40.3456, 774.592 )
 
 [node name="StaticBody2D3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1159.05, 486 )

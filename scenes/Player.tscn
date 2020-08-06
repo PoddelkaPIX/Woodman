@@ -217,6 +217,7 @@ smoothing_speed = 10.0
 drag_margin_left = 0.05
 drag_margin_top = 0.1
 drag_margin_right = 0.05
+editor_draw_drag_margin = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 13 )
@@ -238,7 +239,11 @@ one_shot = true
 [node name="gravity_timer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="camera_zoom" type="Timer" parent="."]
+one_shot = true
 [connection signal="body_entered" from="Area_Attack" to="." method="_on_Area_Attack_body_entered"]
 [connection signal="body_entered" from="Area_kick" to="." method="_on_Area_kick_body_entered"]
 [connection signal="timeout" from="looting_timer" to="." method="_on_looting_timer_timeout"]
 [connection signal="timeout" from="gravity_timer" to="." method="_on_gravity_timer_timeout"]
+[connection signal="timeout" from="camera_zoom" to="." method="_on_camera_zoom_timeout"]
