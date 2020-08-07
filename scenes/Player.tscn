@@ -245,6 +245,14 @@ one_shot = true
 
 [node name="camera_zoom" type="Timer" parent="."]
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2( 1.83541, 14.1827 )
+gravity = Vector2( -100, -98 )
+initial_velocity = 95.24
+initial_velocity_random = 0.61
+color = Color( 0.145098, 0.705882, 0.780392, 1 )
 [connection signal="body_entered" from="Area_Attack" to="." method="_on_Area_Attack_body_entered"]
 [connection signal="body_entered" from="Area_kick" to="." method="_on_Area_kick_body_entered"]
 [connection signal="timeout" from="looting_timer" to="." method="_on_looting_timer_timeout"]

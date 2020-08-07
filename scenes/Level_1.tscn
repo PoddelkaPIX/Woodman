@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://ground/ground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sprites/uu.png" type="Texture" id=7]
 [ext_resource path="res://ground/BG.png" type="Texture" id=8]
+[ext_resource path="res://scenes/mushroom.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -137,4 +138,10 @@ position = Vector2( -292.412, 260 )
 scale = Vector2( -2, 2 )
 z_index = -1
 texture = ExtResource( 3 )
+
+[node name="mushroom" parent="." instance=ExtResource( 9 )]
+position = Vector2( 415.311, 326.157 )
+
+[node name="mushroom2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 617.659, 123.672 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]
