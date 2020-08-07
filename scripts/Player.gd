@@ -29,6 +29,8 @@ func _ready():
 	$UI/Control/axe.visible = false
 	
 func _physics_process(delta):
+	if G.axe_is_taken == true:
+		$CPUParticles2D.visible = true
 	if zoom == true:
 		camera_zoom_x -= 0.5 * delta
 		camera_zoom_y -= 0.5 * delta

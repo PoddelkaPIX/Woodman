@@ -16,7 +16,7 @@ extents = Vector2( 13, 9 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "attack1"
-length = 0.3
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -222,7 +222,7 @@ editor_draw_drag_margin = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 13 )
 hframes = 24
-frame = 10
+frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 4 )
@@ -243,6 +243,17 @@ one_shot = true
 
 [node name="camera_zoom" type="Timer" parent="."]
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2( 0, 17.2163 )
+emission_shape = 3
+emission_points = PoolVector2Array(  )
+emission_colors = PoolColorArray(  )
+gravity = Vector2( 0, -98 )
+initial_velocity = 20.0
+initial_velocity_random = 1.0
+color = Color( 0.215686, 0.913725, 0.898039, 1 )
 [connection signal="body_entered" from="Area_Attack" to="." method="_on_Area_Attack_body_entered"]
 [connection signal="body_entered" from="Area_kick" to="." method="_on_Area_kick_body_entered"]
 [connection signal="timeout" from="looting_timer" to="." method="_on_looting_timer_timeout"]
