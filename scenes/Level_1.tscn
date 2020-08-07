@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://sprites/uu.png" type="Texture" id=7]
 [ext_resource path="res://ground/BG.png" type="Texture" id=8]
 [ext_resource path="res://scenes/mushroom.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ground/Layer_0003_6.png" type="Texture" id=10]
+[ext_resource path="res://ground/Layer_0000_9.png" type="Texture" id=11]
+[ext_resource path="res://ground/Layer_0004_Lights.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -40,6 +43,30 @@ scale = Vector2( -1.71274, 1.3915 )
 z_index = 2
 texture = ExtResource( 3 )
 
+[node name="Layer_0003_6" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.988235 )
+position = Vector2( -24.0722, -271.517 )
+scale = Vector2( 1.39937, 1.91674 )
+texture = ExtResource( 10 )
+
+[node name="Layer_0003_7" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.988235 )
+position = Vector2( 1395, -337.442 )
+scale = Vector2( 1.39937, 1.91674 )
+texture = ExtResource( 10 )
+
+[node name="Layer_0000_9" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.921569 )
+position = Vector2( 1222.7, -577.765 )
+scale = Vector2( 1.82178, 2.456 )
+texture = ExtResource( 11 )
+
+[node name="mushroom" parent="." instance=ExtResource( 9 )]
+position = Vector2( 415.311, 326.157 )
+
+[node name="mushroom2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 619.391, 109.53 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 40.3456, 336.289 )
 
@@ -51,6 +78,18 @@ position = Vector2( -123, 545 )
 
 [node name="StaticBody2D6" parent="." instance=ExtResource( 6 )]
 position = Vector2( 8.3456, 651.787 )
+rotation = -3.14159
+
+[node name="StaticBody2D10" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1197.49, -398.5 )
+rotation = -3.14159
+
+[node name="StaticBody2D11" parent="." instance=ExtResource( 6 )]
+position = Vector2( 513.909, -333.397 )
+rotation = -3.14159
+
+[node name="StaticBody2D12" parent="." instance=ExtResource( 6 )]
+position = Vector2( -268.151, -331.983 )
 rotation = -3.14159
 
 [node name="StaticBody2D7" parent="." instance=ExtResource( 6 )]
@@ -66,6 +105,14 @@ rotation = -1.5708
 
 [node name="StaticBody2D5" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1561.65, 697.099 )
+rotation = -1.5708
+
+[node name="StaticBody2D8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1815.92, -70.328 )
+rotation = -1.5708
+
+[node name="StaticBody2D9" parent="." instance=ExtResource( 6 )]
+position = Vector2( -625.009, 2.42 )
 rotation = -1.5708
 
 [node name="Area2D2" type="Area2D" parent="."]
@@ -139,9 +186,21 @@ scale = Vector2( -2, 2 )
 z_index = -1
 texture = ExtResource( 3 )
 
-[node name="mushroom" parent="." instance=ExtResource( 9 )]
-position = Vector2( 415.311, 326.157 )
+[node name="Layer_0004_Lights" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.811765 )
+position = Vector2( 464.49, -381.614 )
+scale = Vector2( 1.82178, 2.456 )
+texture = ExtResource( 12 )
 
-[node name="mushroom2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 617.659, 123.672 )
+[node name="Layer_0004_Lights2" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.811765 )
+position = Vector2( 1092.39, -374.479 )
+scale = Vector2( 1.82178, 2.456 )
+texture = ExtResource( 12 )
+
+[node name="Layer_0004_Lights3" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.811765 )
+position = Vector2( 1983.79, -345.938 )
+scale = Vector2( 1.82178, 2.456 )
+texture = ExtResource( 12 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]

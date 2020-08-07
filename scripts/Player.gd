@@ -48,7 +48,9 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_select") and cd_attack <= 0:
 		kick = true
+		velocity.x = 0
 	elif Input.is_action_just_pressed("ui_accept") and cd_attack <= 0:
+		velocity.x = 0
 		attack = true
 	
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0:
