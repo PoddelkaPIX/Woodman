@@ -16,7 +16,6 @@ extents = Vector2( 13, 9 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "attack1"
-length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
