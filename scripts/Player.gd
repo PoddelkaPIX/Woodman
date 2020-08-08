@@ -29,6 +29,12 @@ func _ready():
 	$UI/Control/axe.visible = false
 	
 func _physics_process(delta):
+	G.player_direction = direction  #передаём в глобальную переменную сторону взгляда игрока
+	cd_spin -= 1 * delta
+	cd_attack -= 1 * delta
+	
+	if is_on_floor() and attack == true or kick == true:
+		velocity.x = 0
 	if G.axe_is_taken == true:
 		$CPUParticles2D.visible = true
 	if zoom == true:
@@ -38,19 +44,14 @@ func _physics_process(delta):
 			$Camera2D.set_zoom(Vector2(camera_zoom_x, camera_zoom_y))
 		else:
 			zoom = false
-	G.player_direction = direction  #передаём в глобальную переменную сторону взгляда игрока
-	cd_spin -= 1 * delta
-	cd_attack -= 0.1 
 	 #кнопочки
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		G.E_pressed = true
 		$looting_timer.start() #длительность нажатия клавиши Е = 0.1 сек
 	
-	if Input.is_action_just_pressed("ui_select") and cd_attack <= 0:
+	if Input.is_action_just_pressed("ui_select") and cd_attack <= 0 and attack == false:
 		kick = true
-		velocity.x = 0
-	elif Input.is_action_just_pressed("ui_accept") and cd_attack <= 0:
-		velocity.x = 0
+	elif Input.is_action_just_pressed("ui_accept") and cd_attack <= 0 and kick == false:
 		attack = true
 	
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0:
@@ -128,7 +129,7 @@ func animation():
 	Anim.play(anim)
 #функции окончания проигрывания анимаций
 func _kick_end():
-	cd_attack = 0.5
+	cd_attack = 0.2
 	kick = false
 	$Area_kick/kick.disabled = true
 
@@ -140,7 +141,7 @@ func _spin_end():
 		velocity.x = 0
 
 func _attack_end():
-	cd_attack = 0.5
+	cd_attack = 0.2
 	attack = false
 	$Area_Attack/attack.disabled = true
 
