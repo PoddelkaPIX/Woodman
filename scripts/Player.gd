@@ -83,9 +83,9 @@ func _physics_process(delta):
 	 #управление шейпами
 	if spin == true:
 		if direction == 1:
-			velocity.x = + 400
+			velocity.x = + 200
 		else:
-			velocity.x = - 400
+			velocity.x = - 200
 	elif attack == true:
 		$Area_Attack/attack.disabled = false
 	elif kick == true:
