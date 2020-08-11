@@ -1,5 +1,7 @@
 extends Node2D
 
+func get_player():
+	return $Player
 func _ready():
 	OS.center_window() #при запуске отладки, окно центрируется на экране
 func _process(delta):
