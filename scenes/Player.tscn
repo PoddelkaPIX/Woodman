@@ -158,7 +158,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "spin"
-length = 0.7
+length = 0.55
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -166,10 +167,10 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 41, 42, 43, 44, 45, 46 ]
+"values": [ 41, 42, 43, 44, 45, 46, 47, 48, 49 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -178,7 +179,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.7 ),
+"times": PoolRealArray( 0.55 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -224,8 +225,9 @@ editor_draw_drag_margin = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 13 )
-hframes = 47
-frame = 19
+vframes = 3
+hframes = 17
+frame = 40
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 4 )
