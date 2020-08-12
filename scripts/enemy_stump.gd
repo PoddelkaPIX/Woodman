@@ -11,6 +11,7 @@ var direction = 1
 var health = 20
 var toss = false
 var target = null
+var prev_pos
 
 func _physics_process(delta):
 	var pos = position
@@ -38,11 +39,14 @@ func _physics_process(delta):
 		elif not $RayCast_legs.is_colliding():
 			direction *= -1;
 			$stump.flip_h = bool(1-direction)
-	# Управляет шейпами и лучами в зависимости от направления их взгляда
+			
+# Управляет шейпами и лучами в зависимости от направления их взгляда
 	if direction == 1:
 		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x) * -1
 		$RayCast_legs.position.x = abs($RayCast_legs.position.x)
 		$RayCast_opinion.position.x = abs($RayCast_opinion.position.x)
+		$RayCast_jump.position.x = abs($RayCast_jump.position.x)
+		$RayCast_jump.rotation_degrees = -90
 		$Area_attack/attack.position.x = abs($Area_attack/attack.position.x)
 		$RayCast_opinion.rotation_degrees = -90
 		$stump.flip_h = true
@@ -50,19 +54,23 @@ func _physics_process(delta):
 		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x)
 		$RayCast_legs.position.x = abs($RayCast_legs.position.x) * -1
 		$Area_attack/attack.position.x = abs($Area_attack/attack.position.x) * -1
+		$RayCast_jump.position.x = abs($RayCast_jump.position.x) * -1
+		$RayCast_jump.rotation_degrees = 90
 		$RayCast_opinion.position.x = abs($RayCast_opinion.position.x) * -1
 		$RayCast_opinion.rotation_degrees = 90
 		$stump.flip_h = false
 	search_for_target()
 	velocity.y *= GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
-
+		
 func search_for_target():
 	var pl = get_parent().get_player()
 	if position.distance_to(pl.position) < 30:
 		velocity.x = 0
+		
 	elif position.distance_to(pl.position) < 100:
 		target = pl
+		$RayCast_jump.enabled = true
 		$RayCast_opinion.enabled = false
 		$RayCast_legs.enabled = false
 		velocity = (pl.position - position)
@@ -70,16 +78,22 @@ func search_for_target():
 			direction = 1
 		else:
 			direction = -1
-	elif position.distance_to(pl.position) > 300:
+	elif position.distance_to(pl.position) > 500:
 		target = null
+		$RayCast_jump.enabled = false
 		$RayCast_opinion.enabled = true
 		$RayCast_legs.enabled = true
-	velocity.y = 20
+		
+	if $RayCast_jump.is_colliding():
+		velocity.y += -350
+	else:
+		velocity.y = 20
 
 func _on_Area_attack_body_entered(body):
 	if 'Player' in body.name:
 		body.heath -= 1
-		$attack_range/attack.disabled = false
+		$Area_attack/attack.disabled = true
+		
 
 func _on_Timer_timeout(): #таймер окончани подбрасывания
 	toss = false
@@ -88,3 +102,6 @@ func _on_Timer_timeout(): #таймер окончани подбрасыван�
 func _on_Timer_attack_timeout():
 	move = true
 	$Area_attack/attack.disabled = false
+
+
+

@@ -40,7 +40,7 @@ func _physics_process(delta):
 		
 		
 	if G.axe_is_taken == true:
-		$CPUParticles2D.visible = true
+		$CPUParticles2D.emitting = true
 		
 	if zoom == true:
 		camera_zoom_x -= 0.5 * delta
@@ -101,11 +101,13 @@ func _physics_process(delta):
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x) * -1
 		$Area_Attack/attack.position.x = abs($Area_Attack/attack.position.x)
 		$Area_kick/kick.position.x = abs($Area_kick/kick.position.x)
+		$Particles_run.rotation_degrees = -77
 		$Sprite.flip_h = false
 	else:
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x)
 		$Area_Attack/attack.position.x = abs($Area_Attack/attack.position.x) * -1
 		$Area_kick/kick.position.x = abs($Area_kick/kick.position.x) * -1
+		$Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
 	
 	velocity.y += GRAVITY
@@ -128,7 +130,10 @@ func animation():
 			anim = 'run'
 		else:
 			anim = 'idle'
-	
+	if anim == 'run':
+		$Particles_run.emitting = true
+	else:
+		$Particles_run.emitting = false
 	if anim == 'idle':
 		velocity.x = 0
 	

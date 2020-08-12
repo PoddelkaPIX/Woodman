@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -187,6 +187,11 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Curve" id=11]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2147483650
 collision_mask = 5
@@ -250,12 +255,31 @@ one_shot = true
 one_shot = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-visible = false
 position = Vector2( 1.83541, 14.1827 )
+emitting = false
 gravity = Vector2( -100, -98 )
 initial_velocity = 95.24
 initial_velocity_random = 0.61
 color = Color( 0.145098, 0.705882, 0.780392, 1 )
+
+[node name="Particles_run" type="CPUParticles2D" parent="."]
+position = Vector2( 2.38419e-07, 30.7013 )
+rotation = -1.3439
+scale = Vector2( 3, 2 )
+amount = 20
+spread = 124.29
+gravity = Vector2( 0.179, -100 )
+initial_velocity = 20.0
+initial_velocity_random = 0.36
+angular_velocity = -102.85
+angular_velocity_random = 0.46
+angular_velocity_curve = SubResource( 11 )
+orbit_velocity_random = 0.42
+linear_accel = -11.91
+linear_accel_random = 0.35
+radial_accel = -57.15
+radial_accel_random = 0.39
+color = Color( 0.0666667, 0.533333, 0.247059, 1 )
 [connection signal="body_entered" from="Area_Attack" to="." method="_on_Area_Attack_body_entered"]
 [connection signal="body_entered" from="Area_kick" to="." method="_on_Area_kick_body_entered"]
 [connection signal="timeout" from="looting_timer" to="." method="_on_looting_timer_timeout"]
