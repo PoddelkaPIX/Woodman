@@ -11,7 +11,7 @@ var direction = 1
 var prev_pos = Vector2()
 
 func _process(delta):
-	target() 
+	#target() 
 	velocity.x
 	move_and_slide(velocity)
 	velocity.y += GRAVITY

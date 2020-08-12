@@ -11,18 +11,9 @@ var direction = 1
 var health = 20
 var toss = false
 var target = null
-var pos
 
-func search_for_target():
-	var pl = get_parent().get_player()
-	if position.distance_to(pl.position) < 300:
-		target = pl
-		velocity = (pl.position - position)
-	else:
-		target = null
-	
 func _physics_process(delta):
-	pos = position
+	var pos = position
 	$Label.text = str(health) #отображение количества hp
 	
 	if health <= 0: #проверка количества hp
@@ -37,8 +28,10 @@ func _physics_process(delta):
 		else:
 			velocity.x = - 100
 			velocity.y = - 100
-	elif is_alive == true and is_on_floor() and target == null: #обычное состояние вне битвы
+			
+	elif is_alive == true and is_on_floor() and target == null and move: #обычное состояние вне битвы
 		velocity.x = direction * SPEED
+		
 		if $RayCast_opinion.is_colliding():
 			direction *= -1;
 			$stump.flip_h = bool(1-direction);
@@ -61,11 +54,37 @@ func _physics_process(delta):
 		$RayCast_opinion.rotation_degrees = 90
 		$stump.flip_h = false
 	search_for_target()
-	velocity.y += GRAVITY
+	velocity.y *= GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
 
+func search_for_target():
+	var pl = get_parent().get_player()
+	if position.distance_to(pl.position) < 30:
+		velocity.x = 0
+	elif position.distance_to(pl.position) < 100:
+		target = pl
+		$RayCast_opinion.enabled = false
+		$RayCast_legs.enabled = false
+		velocity = (pl.position - position)
+		if velocity.x > 0:
+			direction = 1
+		else:
+			direction = -1
+	elif position.distance_to(pl.position) > 300:
+		target = null
+		$RayCast_opinion.enabled = true
+		$RayCast_legs.enabled = true
+	velocity.y = 20
 
+func _on_Area_attack_body_entered(body):
+	if 'Player' in body.name:
+		body.heath -= 1
+		$attack_range/attack.disabled = false
 
 func _on_Timer_timeout(): #таймер окончани подбрасывания
 	toss = false
 	move = true
+
+func _on_Timer_attack_timeout():
+	move = true
+	$Area_attack/attack.disabled = false

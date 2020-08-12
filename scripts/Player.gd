@@ -17,6 +17,8 @@ var cd_spin = 0
 var cd_attack = 0
 var camera_zoom_x = 0.8
 var camera_zoom_y = 0.8
+var heath = 3
+var turn = true #поворот
 var anim
 
 onready var Anim = $AnimationPlayer
@@ -33,10 +35,13 @@ func _physics_process(delta):
 	cd_spin -= 1 * delta
 	cd_attack -= 1 * delta
 	
-	if is_on_floor() and attack == true or kick == true:
-		velocity.x = 0
+	if heath <= 0:
+		get_tree().reload_current_scene()
+		
+		
 	if G.axe_is_taken == true:
 		$CPUParticles2D.visible = true
+		
 	if zoom == true:
 		camera_zoom_x -= 0.5 * delta
 		camera_zoom_y -= 0.5 * delta
@@ -51,19 +56,20 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_select") and cd_attack <= 0 and attack == false:
 		kick = true
+		turn = false
 	elif Input.is_action_just_pressed("ui_accept") and cd_attack <= 0 and kick == false:
 		attack = true
-	
+		turn = false
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0:
 		spin = true
 		set_collision_mask(1)
-	elif Input.is_action_pressed("ui_left") and spin == false:
+	elif Input.is_action_pressed("ui_left") and spin == false and turn:
 		if velocity.x >= - speed_limit:
 			velocity.x -= 15
 		else:
 			velocity.x = - speed_limit
 		direction = -1
-	elif Input.is_action_pressed("ui_right") and spin == false:
+	elif Input.is_action_pressed("ui_right") and spin == false and turn:
 		if velocity.x <= speed_limit:
 			velocity.x += 15
 		else:
@@ -83,9 +89,9 @@ func _physics_process(delta):
 	 #управление шейпами
 	if spin == true:
 		if direction == 1:
-			velocity.x = + 250
+			velocity.x = + 400
 		else:
-			velocity.x = - 250
+			velocity.x = - 400
 	elif attack == true:
 		$Area_Attack/attack.disabled = false
 	elif kick == true:
@@ -129,6 +135,7 @@ func animation():
 	Anim.play(anim)
 #функции окончания проигрывания анимаций
 func _kick_end():
+	turn = true
 	cd_attack = 0.2
 	kick = false
 	$Area_kick/kick.disabled = true
@@ -141,6 +148,7 @@ func _spin_end():
 		velocity.x = 0
 
 func _attack_end():
+	turn = true
 	cd_attack = 0.2
 	attack = false
 	$Area_Attack/attack.disabled = true
