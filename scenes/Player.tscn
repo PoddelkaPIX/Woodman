@@ -9,7 +9,7 @@ radius = 9.0
 height = 42.0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5.1941, 18 )
+extents = Vector2( 8.41152, 18 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 13, 9 )
@@ -24,10 +24,10 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19, 20, 21, 22, 23 ]
+"values": [ 19, 20, 23, 22 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -206,7 +206,7 @@ shape = SubResource( 1 )
 [node name="Area_Attack" type="Area2D" parent="."]
 
 [node name="attack" type="CollisionShape2D" parent="Area_Attack"]
-position = Vector2( 39.6992, 3 )
+position = Vector2( 34.0232, 3 )
 shape = SubResource( 2 )
 disabled = true
 
@@ -232,7 +232,7 @@ editor_draw_drag_margin = true
 texture = ExtResource( 13 )
 vframes = 3
 hframes = 17
-frame = 40
+frame = 19
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 4 )
@@ -266,7 +266,7 @@ color = Color( 0.145098, 0.705882, 0.780392, 1 )
 position = Vector2( 2.38419e-07, 30.7013 )
 rotation = -1.3439
 scale = Vector2( 3, 2 )
-amount = 20
+amount = 5
 spread = 124.29
 gravity = Vector2( 0.179, -100 )
 initial_velocity = 20.0

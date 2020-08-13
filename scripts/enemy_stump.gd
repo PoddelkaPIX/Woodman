@@ -12,24 +12,21 @@ var health = 20
 var toss = false
 var target = null
 var prev_pos
+var cd_toss = 1.5
+var jump = false
 
 func _physics_process(delta):
 	var pos = position
 	$Label.text = str(health) #отображение количества hp
-	
+		
 	if health <= 0: #проверка количества hp
 		queue_free()
-		
-	if toss == true: #подкидывание после пинка
-		$Timer.start()
-		
-		if G.player_direction == 1:
-			velocity.x = 100
-			velocity.y = - 100
+	elif jump == true:
+		velocity.y = -200
+		if direction == 1:
+			velocity.x = 40
 		else:
-			velocity.x = - 100
-			velocity.y = - 100
-			
+			velocity.x = -40
 	elif is_alive == true and is_on_floor() and target == null and move: #обычное состояние вне битвы
 		velocity.x = direction * SPEED
 		
@@ -65,10 +62,26 @@ func _physics_process(delta):
 		
 func search_for_target():
 	var pl = get_parent().get_player()
-	if position.distance_to(pl.position) < 30:
+	
+	if toss == true: #подкидывание после пинка
+		cd_toss -= 0.1
+		move = false
+		if G.player_direction == 1:
+			velocity.x = 100
+			velocity.y = - 100
+		else:
+			velocity.x = - 100
+			velocity.y = - 100
+		if cd_toss <= 0:
+			velocity.x = 0
+			$Timer_move.start(0.5)
+			toss = false
+			cd_toss = 1.5	
+			
+	elif position.distance_to(pl.position) < 40 or move == false:
 		velocity.x = 0
 		
-	elif position.distance_to(pl.position) < 100:
+	elif position.distance_to(pl.position) <= 100:
 		target = pl
 		$RayCast_jump.enabled = true
 		$RayCast_opinion.enabled = false
@@ -78,14 +91,23 @@ func search_for_target():
 			direction = 1
 		else:
 			direction = -1
-	elif position.distance_to(pl.position) > 500:
+			
+	elif position.distance_to(pl.position) >= 300:
+		move = false
+		velocity.x = 0
 		target = null
+		$Timer_move.start(1)
 		$RayCast_jump.enabled = false
 		$RayCast_opinion.enabled = true
 		$RayCast_legs.enabled = true
 		
 	if $RayCast_jump.is_colliding():
-		velocity.y += -350
+		jump = true
+	else:
+		jump = false
+		
+	if toss == true:
+		velocity.y = -10
 	else:
 		velocity.y = 20
 
@@ -94,14 +116,13 @@ func _on_Area_attack_body_entered(body):
 		body.heath -= 1
 		$Area_attack/attack.disabled = true
 		
-
-func _on_Timer_timeout(): #таймер окончани подбрасывания
-	toss = false
-	move = true
-
 func _on_Timer_attack_timeout():
 	move = true
 	$Area_attack/attack.disabled = false
 
 
 
+
+
+func _on_Timer_move_timeout():
+	move = true

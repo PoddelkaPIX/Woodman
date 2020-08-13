@@ -126,6 +126,7 @@ func animation():
 			anim = 'kick'
 		elif attack == true:
 			anim = 'attack1'
+			if is_on_floor(): velocity.x = 0
 		elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
 			anim = 'run'
 		else:
