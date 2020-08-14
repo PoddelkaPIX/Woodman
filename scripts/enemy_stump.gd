@@ -10,6 +10,7 @@ var velocity = Vector2()
 var direction = 1
 var health = 20
 var toss = false
+var toss_attack = false
 var target = null
 var prev_pos
 var cd_toss = 1.5
@@ -21,12 +22,7 @@ func _physics_process(delta):
 		
 	if health <= 0: #проверка количества hp
 		queue_free()
-	elif jump == true:
-		velocity.y = -200
-		if direction == 1:
-			velocity.x = 40
-		else:
-			velocity.x = -40
+		
 	elif is_alive == true and is_on_floor() and target == null and move: #обычное состояние вне битвы
 		velocity.x = direction * SPEED
 		
@@ -62,7 +58,6 @@ func _physics_process(delta):
 		
 func search_for_target():
 	var pl = get_parent().get_player()
-	
 	if toss == true: #подкидывание после пинка
 		cd_toss -= 0.1
 		move = false
@@ -77,11 +72,22 @@ func search_for_target():
 			$Timer_move.start(0.5)
 			toss = false
 			cd_toss = 1.5	
-			
+	elif toss_attack == true: #подкидывание после пинка
+		cd_toss -= 0.1
+		move = false
+		if G.player_direction == 1:
+			velocity.x = 100
+			velocity.y = - 100
+		else:
+			velocity.x = - 100
+			velocity.y = - 100
+		if cd_toss <= 0:
+			toss_attack = false
+		
 	elif position.distance_to(pl.position) < 40 or move == false:
 		velocity.x = 0
 		
-	elif position.distance_to(pl.position) <= 100:
+	elif position.distance_to(pl.position) <= 200:
 		target = pl
 		$RayCast_jump.enabled = true
 		$RayCast_opinion.enabled = false

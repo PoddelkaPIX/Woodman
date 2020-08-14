@@ -67,7 +67,7 @@ position = Vector2( 415.311, 326.157 )
 position = Vector2( 619.391, 109.53 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 578.766, 109.53 )
+position = Vector2( -519.234, 1107.18 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 803, 545 )
@@ -77,6 +77,14 @@ position = Vector2( -123, 545 )
 
 [node name="StaticBody2D6" parent="." instance=ExtResource( 6 )]
 position = Vector2( 8.3456, 651.787 )
+rotation = -3.14159
+
+[node name="StaticBody2D13" parent="." instance=ExtResource( 6 )]
+position = Vector2( -534.042, 1248.11 )
+rotation = -3.14159
+
+[node name="StaticBody2D14" parent="." instance=ExtResource( 6 )]
+position = Vector2( 391.252, 1247.92 )
 rotation = -3.14159
 
 [node name="StaticBody2D10" parent="." instance=ExtResource( 6 )]
@@ -127,6 +135,20 @@ position = Vector2( -298, 253.374 )
 scale = Vector2( 0.174615, 3.23561 )
 texture = ExtResource( 7 )
 
+[node name="Area2D3" type="Area2D" parent="."]
+position = Vector2( -380.816, 889.42 )
+collision_layer = 4
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2( -298, 260 )
+shape = SubResource( 1 )
+
+[node name="uu" type="Sprite" parent="Area2D3"]
+position = Vector2( -298, 253.374 )
+scale = Vector2( 0.174615, 3.23561 )
+texture = ExtResource( 7 )
+
 [node name="Axe_item" parent="." instance=ExtResource( 5 )]
 position = Vector2( 318.539, 307.709 )
 rotation = -2.0944
@@ -144,6 +166,30 @@ __meta__ = {
 }
 
 [node name="enemy_stump" parent="." instance=ExtResource( 2 )]
+position = Vector2( 447.311, 1163.9 )
+
+[node name="enemy_stump5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 85.7256, 1144.18 )
+
+[node name="enemy_stump6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 287.541, 1129.18 )
+
+[node name="enemy_stump7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 557.29, 1150.18 )
+
+[node name="enemy_stump8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 651.391, 1160.24 )
+
+[node name="enemy_stump9" parent="." instance=ExtResource( 2 )]
+position = Vector2( -123, 1153.18 )
+
+[node name="enemy_stump10" parent="." instance=ExtResource( 2 )]
+position = Vector2( -24.0722, 1154.07 )
+
+[node name="enemy_stump11" parent="." instance=ExtResource( 2 )]
+position = Vector2( -237.66, 1153.18 )
+
+[node name="enemy_stump4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 918.157, 210.603 )
 
 [node name="enemy_stump2" parent="." instance=ExtResource( 2 )]
@@ -200,3 +246,4 @@ position = Vector2( 1983.79, -345.938 )
 scale = Vector2( 1.82178, 2.456 )
 texture = ExtResource( 12 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]
+[connection signal="body_shape_entered" from="Area2D3" to="." method="_on_Area2D2_body_shape_entered"]

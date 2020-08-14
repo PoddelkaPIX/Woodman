@@ -126,7 +126,7 @@ func animation():
 			anim = 'kick'
 		elif attack == true:
 			anim = 'attack1'
-			if is_on_floor(): velocity.x = 0
+			#if is_on_floor(): velocity.x = 0
 		elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
 			anim = 'run'
 		else:
@@ -172,7 +172,7 @@ func _on_Area_Attack_body_entered(body): #свойства атаки
 			body.health -= 5
 		else: #атака с усилением
 			body.health -= 10
-
+		body.toss_attack = true
 func _on_Area_kick_body_entered(body): #свойства пинка
 	if 'enemy' in body.name:
 		body.toss = true
