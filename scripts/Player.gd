@@ -60,7 +60,10 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("ui_accept") and cd_attack <= 0 and kick == false:
 		attack = true
 		turn = false
-	if Input.is_action_pressed("ui_down") and cd_spin <= 0:
+	elif Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("ui_accept"):
+			$spin_attack/spin_attack_box.disabled = false
+	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
@@ -167,6 +170,7 @@ func _on_looting_timer_timeout(): #таймер выключающий нажа�
 
 func _on_Area_Attack_body_entered(body): #свойства атаки
 	if 'enemy' in body.name:
+		velocity.x = 0
 		if G.axe_is_taken == false: #обычная атака без усиления
 			print('hit')
 			body.health -= 5

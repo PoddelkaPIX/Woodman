@@ -72,17 +72,6 @@ func search_for_target():
 			$Timer_move.start(0.5)
 			toss = false
 			cd_toss = 1.5	
-	elif toss_attack == true: #подкидывание после пинка
-		cd_toss -= 0.1
-		move = false
-		if G.player_direction == 1:
-			velocity.x = 100
-			velocity.y = - 100
-		else:
-			velocity.x = - 100
-			velocity.y = - 100
-		if cd_toss <= 0:
-			toss_attack = false
 		
 	elif position.distance_to(pl.position) < 40 or move == false:
 		velocity.x = 0

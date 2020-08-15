@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -14,8 +14,10 @@ extents = Vector2( 8.41152, 18 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 13, 9 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "attack1"
+[sub_resource type="CircleShape2D" id=4]
+radius = 25.8506
+
+[sub_resource type="Animation" id=5]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -45,8 +47,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "fall"
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -60,8 +61,7 @@ tracks/0/keys = {
 "values": [ 44 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "idle"
+[sub_resource type="Animation" id=7]
 length = 1.1
 loop = true
 tracks/0/type = "value"
@@ -77,8 +77,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "jump"
+[sub_resource type="Animation" id=8]
 length = 1.05
 loop = true
 step = 0.05
@@ -109,8 +108,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "kick"
+[sub_resource type="Animation" id=9]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -140,8 +138,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "run"
+[sub_resource type="Animation" id=10]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -157,8 +154,7 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 7, 8, 9 ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "spin"
+[sub_resource type="Animation" id=11]
 length = 0.55
 step = 0.05
 tracks/0/type = "value"
@@ -188,7 +184,22 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Curve" id=11]
+[sub_resource type="Animation" id=13]
+resource_name = "spin_attack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[sub_resource type="Curve" id=12]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -218,6 +229,12 @@ position = Vector2( 21.5686, 12 )
 shape = SubResource( 3 )
 disabled = true
 
+[node name="spin_attack" type="Area2D" parent="."]
+
+[node name="spin_attack_box" type="CollisionShape2D" parent="spin_attack"]
+shape = SubResource( 4 )
+disabled = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.4, 0.4 )
@@ -233,16 +250,17 @@ editor_draw_drag_margin = true
 texture = ExtResource( 13 )
 vframes = 4
 hframes = 17
-frame = 23
+frame = 44
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack1 = SubResource( 4 )
-anims/fall = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/kick = SubResource( 8 )
-anims/run = SubResource( 9 )
-anims/spin = SubResource( 10 )
+anims/attack1 = SubResource( 5 )
+anims/fall = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+anims/kick = SubResource( 9 )
+anims/run = SubResource( 10 )
+anims/spin = SubResource( 11 )
+anims/spin_attack = SubResource( 13 )
 
 [node name="looting_timer" type="Timer" parent="."]
 wait_time = 0.1
@@ -274,7 +292,7 @@ initial_velocity = 20.0
 initial_velocity_random = 0.36
 angular_velocity = -102.85
 angular_velocity_random = 0.46
-angular_velocity_curve = SubResource( 11 )
+angular_velocity_curve = SubResource( 12 )
 orbit_velocity_random = 0.42
 linear_accel = -11.91
 linear_accel_random = 0.35
