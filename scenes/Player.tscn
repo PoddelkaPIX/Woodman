@@ -18,7 +18,7 @@ extents = Vector2( 13, 9 )
 radius = 25.8506
 
 [sub_resource type="Animation" id=5]
-length = 0.4
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -27,7 +27,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.3 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 19, 20, 21, 22, 23 ]
@@ -39,7 +39,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -109,8 +109,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 0.3
-step = 0.05
+length = 0.2
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -118,7 +118,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.1, 0.125 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 24, 25, 26, 27, 28, 29 ]
@@ -130,7 +130,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -139,8 +139,9 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=10]
-length = 1.2
+length = 0.9
 loop = true
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -148,7 +149,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675, 0.75, 0.825 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 7, 8, 9 ]
@@ -184,7 +185,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "spin_attack"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -199,7 +200,7 @@ tracks/0/keys = {
 "values": [  ]
 }
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=13]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -250,7 +251,7 @@ editor_draw_drag_margin = true
 texture = ExtResource( 13 )
 vframes = 4
 hframes = 17
-frame = 44
+frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 5 )
@@ -260,7 +261,7 @@ anims/jump = SubResource( 8 )
 anims/kick = SubResource( 9 )
 anims/run = SubResource( 10 )
 anims/spin = SubResource( 11 )
-anims/spin_attack = SubResource( 13 )
+anims/spin_attack = SubResource( 12 )
 
 [node name="looting_timer" type="Timer" parent="."]
 wait_time = 0.1
@@ -292,7 +293,7 @@ initial_velocity = 20.0
 initial_velocity_random = 0.36
 angular_velocity = -102.85
 angular_velocity_random = 0.46
-angular_velocity_curve = SubResource( 12 )
+angular_velocity_curve = SubResource( 13 )
 orbit_velocity_random = 0.42
 linear_accel = -11.91
 linear_accel_random = 0.35

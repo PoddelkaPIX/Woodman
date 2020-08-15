@@ -31,17 +31,16 @@ func _ready():
 	$UI/Control/axe.visible = false
 	
 func _physics_process(delta):
-	G.player_direction = direction  #передаём в глобальную переменную сторону взгляда игрока
+	G.player_direction = direction #передаём в глобальную переменную сторону взгляда игрока
 	cd_spin -= 1 * delta
 	cd_attack -= 1 * delta
 	
 	if heath <= 0:
 		get_tree().reload_current_scene()
-		
-		
+	
 	if G.axe_is_taken == true:
 		$CPUParticles2D.emitting = true
-		
+	
 	if zoom == true:
 		camera_zoom_x -= 0.5 * delta
 		camera_zoom_y -= 0.5 * delta
@@ -49,21 +48,21 @@ func _physics_process(delta):
 			$Camera2D.set_zoom(Vector2(camera_zoom_x, camera_zoom_y))
 		else:
 			zoom = false
-	 #кнопочки
+	#кнопочки
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		G.E_pressed = true
 		$looting_timer.start() #длительность нажатия клавиши Е = 0.1 сек
 	
-	if Input.is_action_just_pressed("ui_select") and cd_attack <= 0 and attack == false:
+	if Input.is_action_just_pressed("ui_rmb") and cd_attack <= 0 and attack == false:
 		kick = true
 		turn = false
-	elif Input.is_action_just_pressed("ui_accept") and cd_attack <= 0 and kick == false:
+	elif Input.is_action_just_pressed("ui_lmb") and cd_attack <= 0 and kick == false:
 		attack = true
 		turn = false
-	elif Input.is_action_pressed("ui_down"):
+	elif Input.is_action_pressed("ui_shift"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
-	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
+	if Input.is_action_pressed("ui_shift") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
@@ -89,7 +88,7 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		GRAVITY = 10
-	 #управление шейпами
+	#управление шейпами
 	if spin == true:
 		if direction == 1:
 			velocity.x = + 400
@@ -116,7 +115,7 @@ func _physics_process(delta):
 	velocity.y += GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
- #машина состояний для анимации
+#машина состояний для анимации
 func animation():
 	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
 		anim = 'jump'
@@ -142,6 +141,7 @@ func animation():
 		velocity.x = 0
 	
 	Anim.play(anim)
+
 #функции окончания проигрывания анимаций
 func _kick_end():
 	turn = true
@@ -185,7 +185,6 @@ func _on_Area_kick_body_entered(body): #свойства пинка
 
 func _on_gravity_timer_timeout():
 	GRAVITY = 15
-
 
 func _on_camera_zoom_timeout():
 	zoom = true
