@@ -56,7 +56,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_rmb") and cd_attack <= 0 and attack == false:
 		kick = true
 		turn = false
-	elif Input.is_action_just_pressed("ui_lmb") and cd_attack <= 0 and kick == false:
+	elif Input.is_action_pressed("ui_lmb") and cd_attack <= 0 and kick == false:
 		attack = true
 		turn = false
 	elif Input.is_action_pressed("ui_shift"):
@@ -91,11 +91,13 @@ func _physics_process(delta):
 	#управление шейпами
 	if spin == true:
 		if direction == 1:
-			velocity.x = + 400
+			velocity.x = + 300
 		else:
-			velocity.x = - 400
+			velocity.x = - 300
+			
 	elif attack == true:
 		$Area_Attack/attack.disabled = false
+		
 	elif kick == true:
 		$Area_kick/kick.disabled = false
 	
@@ -128,7 +130,6 @@ func animation():
 			anim = 'kick'
 		elif attack == true:
 			anim = 'attack1'
-			#if is_on_floor(): velocity.x = 0
 		elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
 			anim = 'run'
 		else:

@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const FLOOR = Vector2(0, -1)
 const SPEED = 30
+const JUMP = 350
 const GRAVITY = 10
 
 var move = true #может двигаться или нет
@@ -52,9 +53,35 @@ func _physics_process(delta):
 		$RayCast_opinion.position.x = abs($RayCast_opinion.position.x) * -1
 		$RayCast_opinion.rotation_degrees = 90
 		$stump.flip_h = false
-	search_for_target()
+		
+	search_for_target() 
 	velocity.y *= GRAVITY
+	animation()
+	jump()
 	velocity = move_and_slide(velocity, FLOOR)
+
+func animation():
+	var pl = get_parent().get_player()
+	if velocity.y < 0:
+		$stump.play('jump')
+	elif position.distance_to(pl.position) < 30:
+		$stump.play('attack')
+		velocity.x = 0
+	else:
+		$stump.play('run')
+		
+func jump():
+	if $RayCast_jump.is_colliding():
+		jump = true
+	else:
+		jump = false
+		
+	if jump == true:
+		velocity.y = -JUMP
+	
+	
+
+	
 		
 func search_for_target():
 	var pl = get_parent().get_player()
@@ -73,7 +100,7 @@ func search_for_target():
 			toss = false
 			cd_toss = 1.5	
 		
-	elif position.distance_to(pl.position) < 40 or move == false:
+	elif position.distance_to(pl.position) < 20 or move == false:
 		velocity.x = 0
 		
 	elif position.distance_to(pl.position) <= 200:
@@ -121,3 +148,7 @@ func _on_Timer_attack_timeout():
 
 func _on_Timer_move_timeout():
 	move = true
+
+
+func _on_Timer_jump_timeout():
+	jump = false
