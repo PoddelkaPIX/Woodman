@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grib2.png-7843524813104e6fbf559a84024edcb3.stex"
+path="res://.import/mushroom_jump8.png-e688569294f8f026a94486617db1ea99.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mushroom/grib2.png"
-dest_files=[ "res://.import/grib2.png-7843524813104e6fbf559a84024edcb3.stex" ]
+source_file="res://sprites/mushroom/mushroom_jump8.png"
+dest_files=[ "res://.import/mushroom_jump8.png-e688569294f8f026a94486617db1ea99.stex" ]
 
 [params]
 

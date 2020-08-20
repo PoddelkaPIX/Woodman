@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ground/Layer_0000_9.png" type="Texture" id=11]
 [ext_resource path="res://ground/Layer_0004_Lights.png" type="Texture" id=12]
 [ext_resource path="res://scenes/enemy_acorn.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Area2D.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -64,11 +65,19 @@ texture = ExtResource( 11 )
 [node name="mushroom" parent="." instance=ExtResource( 9 )]
 position = Vector2( 415.311, 326.157 )
 
+[node name="mushroom3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 363.117, 325.035 )
+
+[node name="mushroom4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 303.626, 326.157 )
+
 [node name="mushroom2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 619.391, 109.53 )
 
+[node name="Area2D" parent="." instance=ExtResource( 14 )]
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 826.356, 197.657 )
+position = Vector2( 516.556, 314.954 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 803, 545 )

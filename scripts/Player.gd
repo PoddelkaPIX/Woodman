@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
+const AXE = preload("res://scenes/drop_the_axe.tscn")
 const JUMP = 350
 const FLOOR = Vector2(0, -1)
 
+var shells = 1 #снаряды
 var GRAVITY = 10
 var speed_limit = 250 #ограничение по скорости игрока
 var velocity = Vector2()
@@ -25,16 +27,15 @@ onready var Anim = $AnimationPlayer
 onready var ui = get_viewport().get_node("res://scenes/UI.tscn")
 
 func _ready():
-	$camera_zoom.start()
+	$Timers/camera_zoom.start()
 	$Camera2D.set_zoom(Vector2(camera_zoom_x, camera_zoom_y))
 	G.axe_is_taken = false
 	$UI/Control/axe.visible = false
-	
+
 func _physics_process(delta):
 	G.player_direction = direction #передаём в глобальную переменную сторону взгляда игрока
 	cd_spin -= 1 * delta
 	cd_attack -= 1 * delta
-	
 	if heath <= 0:
 		get_tree().reload_current_scene()
 	
@@ -51,17 +52,21 @@ func _physics_process(delta):
 	#кнопочки
 	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
 		G.E_pressed = true
-		$looting_timer.start() #длительность нажатия клавиши Е = 0.1 сек
+		$Timers/looting_timer.start() #длительность нажатия клавиши Е = 0.1 сек
 	
 	if Input.is_action_just_pressed("ui_rmb") and cd_attack <= 0 and attack == false:
 		kick = true
 		turn = false
-	elif Input.is_action_pressed("ui_lmb") and cd_attack <= 0 and kick == false:
-		attack = true
-		turn = false
+	elif Input.is_action_pressed("ui_lmb") and shells > 0:
+		shells -= 1
+		G.mouse_position = get_viewport().get_mouse_position()
+		var axe = AXE.instance()
+		axe.position = $Position_attack.global_position
+		get_parent().add_child(axe)
 	elif Input.is_action_pressed("ui_shift"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
+			
 	if Input.is_action_pressed("ui_shift") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
@@ -79,7 +84,7 @@ func _physics_process(delta):
 		direction = 1
 	
 	if Input.is_action_pressed("ui_up") and is_on_floor():
-		$gravity_timer.start()
+		$Timers/gravity_timer.start()
 		jump = true
 		velocity.y = -JUMP
 	else:
@@ -96,27 +101,25 @@ func _physics_process(delta):
 			velocity.x = - 300
 			
 	elif attack == true:
-		$Area_Attack/attack.disabled = false
+		pass
 		
 	elif kick == true:
-		$Area_kick/kick.disabled = false
+		pass
 	
 	if direction == 1:
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x) * -1
-		$Area_Attack/attack.position.x = abs($Area_Attack/attack.position.x)
-		$Area_kick/kick.position.x = abs($Area_kick/kick.position.x)
-		$Particles_run.rotation_degrees = -77
+		$Particles/Particles_run.rotation_degrees = -77
 		$Sprite.flip_h = false
 	else:
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x)
-		$Area_Attack/attack.position.x = abs($Area_Attack/attack.position.x) * -1
-		$Area_kick/kick.position.x = abs($Area_kick/kick.position.x) * -1
-		$Particles_run.rotation_degrees = 77
+		$Particles/Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
-	
+	print(shells)
 	velocity.y += GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
+
+		
 #машина состояний для анимации
 func animation():
 	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
@@ -135,9 +138,9 @@ func animation():
 		else:
 			anim = 'idle'
 	if anim == 'run':
-		$Particles_run.emitting = true
+		$Particles/Particles_run.emitting = true
 	else:
-		$Particles_run.emitting = false
+		$Particles/Particles_run.emitting = false
 	if anim == 'idle':
 		velocity.x = 0
 	
@@ -148,7 +151,6 @@ func _kick_end():
 	turn = true
 	cd_attack = 0.2
 	kick = false
-	$Area_kick/kick.disabled = true
 
 func _spin_end():
 	set_collision_mask(5)
@@ -161,7 +163,6 @@ func _attack_end():
 	turn = true
 	cd_attack = 0.2
 	attack = false
-	$Area_Attack/attack.disabled = true
 
 func _jump_end():
 	jump = false

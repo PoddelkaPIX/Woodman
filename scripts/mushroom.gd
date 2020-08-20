@@ -1,6 +1,15 @@
 extends Area2D
-
+var jump = false
+func _process(delta):
+	if jump == true:
+		$AnimatedSprite.play('jump')
+	else:
+		$AnimatedSprite.play('idle')
 func _on_mushroom_body_entered(body):
 	if 'Player' in body.name and body.velocity.y > 50:
-		$AnimatedSprite.play('jump')
-		body.velocity.y = -600
+		jump = true
+		body.velocity.y = -550
+
+
+func _on_AnimatedSprite_animation_finished():
+	jump = false
