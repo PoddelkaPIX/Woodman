@@ -66,7 +66,7 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("ui_shift"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
-			
+		
 	if Input.is_action_pressed("ui_shift") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
@@ -119,7 +119,6 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
 
-		
 #машина состояний для анимации
 func animation():
 	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
