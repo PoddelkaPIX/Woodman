@@ -189,3 +189,13 @@ func _on_gravity_timer_timeout():
 
 func _on_camera_zoom_timeout():
 	zoom = true
+
+func _on_ghost_trail_timeout():
+	if spin == true:
+		var trail = preload("res://scenes/GhostTrail.tscn").instance()
+		trail.global_position = $Sprite.global_position
+		trail.flip_h = $Sprite.flip_h
+		trail.texture = $Sprite.texture
+		trail.frame = $Sprite.frame
+		get_tree().get_root().add_child(trail)
+		trail.scale = $Sprite.scale
