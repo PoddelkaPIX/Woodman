@@ -59,7 +59,7 @@ func _physics_process(delta):
 		turn = false
 	elif Input.is_action_pressed("ui_lmb") and shells > 0:
 		shells -= 1
-		G.mouse_position = get_viewport().get_mouse_position()
+		G.mouse_position = get_global_mouse_position()
 		var axe = AXE.instance()
 		axe.position = $Position_attack.global_position
 		get_parent().add_child(axe)
