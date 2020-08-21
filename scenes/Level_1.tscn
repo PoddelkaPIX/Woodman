@@ -75,6 +75,7 @@ position = Vector2( 303.626, 326.157 )
 position = Vector2( 619.391, 109.53 )
 
 [node name="Area2D" parent="." instance=ExtResource( 14 )]
+scale = Vector2( 0.1, 0.1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 558, 96 )

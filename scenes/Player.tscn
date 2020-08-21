@@ -273,7 +273,7 @@ editor_draw_drag_margin = true
 texture = ExtResource( 13 )
 vframes = 4
 hframes = 17
-frame = 1
+frame = 19
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 4 )
@@ -286,7 +286,7 @@ anims/spin = SubResource( 10 )
 anims/spin_attack = SubResource( 11 )
 
 [node name="Position_attack" type="Position2D" parent="."]
-position = Vector2( 5.65686, 6.36397 )
+position = Vector2( 0, 14.1827 )
 
 [node name="ghost_trail" type="Timer" parent="."]
 wait_time = 0.1

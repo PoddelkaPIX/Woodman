@@ -40,7 +40,7 @@ func _physics_process(delta):
 		get_tree().reload_current_scene()
 	
 	if G.axe_is_taken == true:
-		$CPUParticles2D.emitting = true
+		$Particles/CPUParticles2D.emitting = true
 	
 	if zoom == true:
 		camera_zoom_x -= 0.5 * delta

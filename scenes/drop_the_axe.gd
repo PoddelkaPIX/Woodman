@@ -1,8 +1,9 @@
 extends Area2D
-const SPEED = 5
+const SPEED = 10
 var velosity = Vector2()
 var returnn = false
 func _process(delta):
+	look_at(G.player_position)
 	if returnn == false:
 		velosity = (G.mouse_position - position).normalized() * SPEED
 	else:
@@ -10,7 +11,7 @@ func _process(delta):
 		
 	if position.distance_to(G.mouse_position) <= 5:
 		returnn = true
-	elif position.distance_to(G.player_position) <= 5:
+	elif position.distance_to(G.player_position) <= 5 and returnn == true:
 		get_parent().get_player().shells += 1
 		queue_free()
 		
