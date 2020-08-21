@@ -1,0 +1,39 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://cursor.gd" type="Script" id=1]
+[ext_resource path="res://sprites/cursor/Cursor_W3.png" type="Texture" id=2]
+[ext_resource path="res://sprites/cursor/Cursor_W4.png" type="Texture" id=3]
+[ext_resource path="res://sprites/cursor/Cursor_R6.png" type="Texture" id=4]
+[ext_resource path="res://sprites/cursor/Cursor_W2.png" type="Texture" id=5]
+[ext_resource path="res://sprites/cursor/Cursor_R3.png" type="Texture" id=6]
+[ext_resource path="res://sprites/cursor/Cursor_R1.png" type="Texture" id=7]
+[ext_resource path="res://sprites/cursor/Cursor_R5.png" type="Texture" id=8]
+[ext_resource path="res://sprites/cursor/Cursor_R7.png" type="Texture" id=9]
+[ext_resource path="res://sprites/cursor/Cursor_R4.png" type="Texture" id=10]
+[ext_resource path="res://sprites/cursor/Cursor_W1.png" type="Texture" id=11]
+[ext_resource path="res://sprites/cursor/Cursor_W8.png" type="Texture" id=12]
+[ext_resource path="res://sprites/cursor/Cursor_W6.png" type="Texture" id=13]
+[ext_resource path="res://sprites/cursor/Cursor_R2.png" type="Texture" id=14]
+[ext_resource path="res://sprites/cursor/Cursor_R8.png" type="Texture" id=15]
+[ext_resource path="res://sprites/cursor/Cursor_W5.png" type="Texture" id=16]
+[ext_resource path="res://sprites/cursor/Cursor_W7.png" type="Texture" id=17]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 17 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "white",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "red",
+"speed": 5.0
+} ]
+
+[node name="cursor" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "red"

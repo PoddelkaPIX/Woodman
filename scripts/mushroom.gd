@@ -8,7 +8,7 @@ func _process(delta):
 func _on_mushroom_body_entered(body):
 	if 'Player' in body.name and body.velocity.y > 50:
 		jump = true
-		body.velocity.y = -550
+		body.velocity.y = -560
 
 
 func _on_AnimatedSprite_animation_finished():

@@ -13,7 +13,7 @@
 [ext_resource path="res://ground/Layer_0000_9.png" type="Texture" id=11]
 [ext_resource path="res://ground/Layer_0004_Lights.png" type="Texture" id=12]
 [ext_resource path="res://scenes/enemy_acorn.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/Area2D.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/cursor.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -73,9 +73,6 @@ position = Vector2( 303.626, 326.157 )
 
 [node name="mushroom2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 619.391, 109.53 )
-
-[node name="Area2D" parent="." instance=ExtResource( 14 )]
-scale = Vector2( 0.1, 0.1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 558, 96 )
@@ -259,6 +256,9 @@ texture = ExtResource( 12 )
 
 [node name="acorn" parent="." instance=ExtResource( 13 )]
 position = Vector2( 49.444, 344.725 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="cursor" parent="." instance=ExtResource( 14 )]
 scale = Vector2( 0.5, 0.5 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]
 [connection signal="body_shape_entered" from="Area2D3" to="." method="_on_Area2D2_body_shape_entered"]

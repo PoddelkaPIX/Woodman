@@ -58,11 +58,12 @@ func _physics_process(delta):
 		kick = true
 		turn = false
 	elif Input.is_action_pressed("ui_lmb") and shells > 0:
-		shells -= 1
-		G.mouse_position = get_global_mouse_position()
-		var axe = AXE.instance()
-		axe.position = $Position_attack.global_position
-		get_parent().add_child(axe)
+		if position.distance_to(get_global_mouse_position()) <= 200:
+			shells -= 1
+			G.mouse_position = get_global_mouse_position()
+			var axe = AXE.instance()
+			axe.position = $Position_attack.global_position
+			get_parent().add_child(axe)
 	elif Input.is_action_pressed("ui_shift"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
