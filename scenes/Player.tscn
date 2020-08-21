@@ -273,7 +273,7 @@ editor_draw_drag_margin = true
 texture = ExtResource( 13 )
 vframes = 4
 hframes = 17
-frame = 10
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 4 )
@@ -287,6 +287,11 @@ anims/spin_attack = SubResource( 11 )
 
 [node name="Position_attack" type="Position2D" parent="."]
 position = Vector2( 5.65686, 6.36397 )
+
+[node name="ghost_trail" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
 [connection signal="timeout" from="Timers/looting_timer" to="." method="_on_looting_timer_timeout"]
 [connection signal="timeout" from="Timers/gravity_timer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="Timers/camera_zoom" to="." method="_on_camera_zoom_timeout"]
+[connection signal="timeout" from="ghost_trail" to="." method="_on_ghost_trail_timeout"]
