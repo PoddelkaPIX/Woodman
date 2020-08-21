@@ -3,6 +3,7 @@ extends Node2D
 func get_player():
 	return $Player
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	OS.center_window() #при запуске отладки, окно центрируется на экране
 func _process(delta):
 	G.player_position = $Player.global_position #передаём глобальную позицию игрока

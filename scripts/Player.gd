@@ -4,7 +4,7 @@ const AXE = preload("res://scenes/drop_the_axe.tscn")
 const JUMP = 350
 const FLOOR = Vector2(0, -1)
 
-var shells = 1 #снаряды
+var shells = 2 #снаряды
 var GRAVITY = 10
 var speed_limit = 250 #ограничение по скорости игрока
 var velocity = Vector2()
@@ -20,6 +20,7 @@ var cd_attack = 0
 var camera_zoom_x = 0.8
 var camera_zoom_y = 0.8
 var heath = 3
+var shot = true
 var turn = true #поворот
 var anim
 
@@ -58,7 +59,10 @@ func _physics_process(delta):
 		kick = true
 		turn = false
 	elif Input.is_action_pressed("ui_lmb") and shells > 0:
-		if position.distance_to(get_global_mouse_position()) <= 200:
+		if position.distance_to(get_global_mouse_position()) <= 200 and shot == true:
+			if shot == true:
+				shot = false
+				$Timer_shot.start(0.2)
 			shells -= 1
 			G.mouse_position = get_global_mouse_position()
 			var axe = AXE.instance()
@@ -200,3 +204,7 @@ func _on_ghost_trail_timeout():
 		trail.frame = $Sprite.frame
 		get_tree().get_root().add_child(trail)
 		trail.scale = $Sprite.scale
+
+
+func _on_Timer_shot_timeout():
+	shot = true

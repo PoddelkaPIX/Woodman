@@ -291,7 +291,12 @@ position = Vector2( 0, 14.1827 )
 [node name="ghost_trail" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="Timer_shot" type="Timer" parent="."]
+one_shot = true
+autostart = true
 [connection signal="timeout" from="Timers/looting_timer" to="." method="_on_looting_timer_timeout"]
 [connection signal="timeout" from="Timers/gravity_timer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="Timers/camera_zoom" to="." method="_on_camera_zoom_timeout"]
 [connection signal="timeout" from="ghost_trail" to="." method="_on_ghost_trail_timeout"]
+[connection signal="timeout" from="Timer_shot" to="." method="_on_Timer_shot_timeout"]

@@ -3,7 +3,7 @@ const SPEED = 10
 var velosity = Vector2()
 var returnn = false
 func _process(delta):
-	rotate(1)
+	rotate(0.5)
 	if returnn == false:
 		velosity = (G.mouse_position - position).normalized() * SPEED
 	else:
