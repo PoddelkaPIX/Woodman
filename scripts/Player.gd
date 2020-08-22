@@ -6,7 +6,7 @@ const FLOOR = Vector2(0, -1)
 
 var shells = 1 #снаряды
 var GRAVITY = 10
-var speed_limit = 250 #ограничение по скорости игрока
+var speed_limit = 225 #ограничение по скорости игрока
 var velocity = Vector2()
 var direction = 1
 var spin = false
@@ -59,7 +59,7 @@ func _physics_process(delta):
 		kick = true
 		turn = false
 	elif Input.is_action_pressed("ui_lmb") and shells > 0:
-		if position.distance_to(get_global_mouse_position()) <= 200 and shot == true:
+		if shot == true:
 			if shot == true:
 				shot = false
 				$Timer_shot.start(0.5)

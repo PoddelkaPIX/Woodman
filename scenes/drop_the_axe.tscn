@@ -4,6 +4,7 @@
 [ext_resource path="res://drop_the_axe.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 6.23031
 
 [node name="drop_the_axe" type="Area2D"]
 collision_layer = 4
@@ -14,4 +15,7 @@ texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Timer_fall_of_the_axe" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_drop_the_axe_body_entered"]
+[connection signal="timeout" from="Timer_fall_of_the_axe" to="." method="_on_Timer_fall_of_the_axe_timeout"]
