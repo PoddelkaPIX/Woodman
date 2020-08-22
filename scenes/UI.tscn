@@ -22,9 +22,9 @@ texture = ExtResource( 1 )
 [node name="hp_player" type="Label" parent="Control"]
 anchor_bottom = 0.58
 margin_left = 167.678
-margin_top = 26.1626
+margin_top = 33.2979
 margin_right = 359.678
-margin_bottom = 150.163
+margin_bottom = 157.298
 rect_scale = Vector2( 3, 3 )
 custom_colors/font_color = Color( 0.0666667, 0.741176, 0.0627451, 1 )
 text = "3"

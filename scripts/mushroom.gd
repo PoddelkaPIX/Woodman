@@ -1,5 +1,13 @@
 extends Area2D
-var jump = false
+
+var jump = true
+
+func _ready():
+	randomize()
+	var number = rand_range(0.2, 0.5)
+	$Timer.start(number)
+	
+	
 func _process(delta):
 	if jump == true:
 		$AnimatedSprite.play('jump')
@@ -12,4 +20,8 @@ func _on_mushroom_body_entered(body):
 
 
 func _on_AnimatedSprite_animation_finished():
+	jump = false
+
+
+func _on_Timer_timeout():
 	jump = false

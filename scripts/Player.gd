@@ -4,7 +4,7 @@ const AXE = preload("res://scenes/drop_the_axe.tscn")
 const JUMP = 350
 const FLOOR = Vector2(0, -1)
 
-var shells = 2 #снаряды
+var shells = 1 #снаряды
 var GRAVITY = 10
 var speed_limit = 250 #ограничение по скорости игрока
 var velocity = Vector2()
@@ -62,7 +62,7 @@ func _physics_process(delta):
 		if position.distance_to(get_global_mouse_position()) <= 200 and shot == true:
 			if shot == true:
 				shot = false
-				$Timer_shot.start(0.2)
+				$Timer_shot.start(0.5)
 			shells -= 1
 			G.mouse_position = get_global_mouse_position()
 			var axe = AXE.instance()
@@ -104,12 +104,6 @@ func _physics_process(delta):
 			velocity.x = + 300
 		else:
 			velocity.x = - 300
-			
-	elif attack == true:
-		pass
-		
-	elif kick == true:
-		pass
 	
 	if direction == 1:
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x) * -1
@@ -119,7 +113,6 @@ func _physics_process(delta):
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x)
 		$Particles/Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
-	print(shells)
 	velocity.y += GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
