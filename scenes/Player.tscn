@@ -227,6 +227,9 @@ one_shot = true
 [node name="camera_zoom" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="lift_timer" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="spin_attack" type="Area2D" parent="."]
 
 [node name="spin_attack_box" type="CollisionShape2D" parent="spin_attack"]
@@ -274,3 +277,4 @@ position = Vector2( 0, 14.1827 )
 [connection signal="timeout" from="Timers/looting_timer" to="." method="_on_looting_timer_timeout"]
 [connection signal="timeout" from="Timers/gravity_timer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="Timers/camera_zoom" to="." method="_on_camera_zoom_timeout"]
+[connection signal="timeout" from="Timers/lift_timer" to="." method="_on_lift_timer_timeout"]

@@ -60,7 +60,8 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
 	
 func jump():
-	if $RayCast_jump.is_colliding():
+	var pl = get_parent().get_player()
+	if $RayCast_jump.is_colliding() and position.distance_to(pl.position) > 50:
 		jump = true
 		$Timer_fall.start(0.2)
 		

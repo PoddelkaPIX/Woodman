@@ -16,13 +16,17 @@ var kick = false
 var attack = false
 var hit = false
 var zoom = false
+var shot = true
+var turn = true #поворот
+var shift = false
+var twisting = false
+var lift = false
+
 var cd_spin = 0
 var cd_attack = 0
 var camera_zoom_x = 0.8
 var camera_zoom_y = 0.8
 var heath = 3
-var shot = true
-var turn = true #поворот
 var anim
 
 onready var Anim = $AnimationPlayer
@@ -56,10 +60,16 @@ func _physics_process(delta):
 		G.E_pressed = true
 		$Timers/looting_timer.start() #длительность нажатия клавиши Е = 0.1 сек
 	
-	if Input.is_action_just_pressed("ui_rmb") and cd_attack <= 0 and attack == false:
-		kick = true
-		turn = false
-	elif Input.is_action_pressed("ui_lmb") and shells > 0:
+	if Input.is_action_pressed("ui_rmb") and cd_attack <= 0 and attack == false:
+		twisting = true
+	else:
+		shift = false
+		twisting = false
+	if Input.is_action_pressed("ui_shift") and cd_spin <= 0 and attack == false:
+		shift = true
+	else:
+		shift = false
+	if Input.is_action_pressed("ui_lmb") and shells > 0:
 		if shot == true:
 			if shot == true:
 				shot = false
@@ -69,11 +79,11 @@ func _physics_process(delta):
 			var axe = AXE.instance()
 			axe.position = $Position_attack.global_position
 			get_parent().add_child(axe)
-	elif Input.is_action_pressed("ui_shift"):
+	elif Input.is_action_pressed("ui_down"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
 		
-	if Input.is_action_pressed("ui_shift") and cd_spin <= 0 and attack == false:
+	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
@@ -115,9 +125,21 @@ func _physics_process(delta):
 		$Particles/Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
 	velocity.y += GRAVITY
+	twisting()
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
-
+	
+func twisting():
+	if twisting == true and G.axe_velosity == true:
+		if position.distance_to(G.axe_position) < 50:
+			lift = true
+			$Timers/lift_timer.start(0.3)
+		else:
+			velocity = (G.axe_position - position).normalized() * 300
+	if lift == true:
+		velocity.y = -300
+			
+	
 #машина состояний для анимации
 func animation():
 	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
@@ -202,3 +224,7 @@ func _on_ghost_trail_timeout():
 
 func _on_Timer_shot_timeout():
 	shot = true
+
+
+func _on_lift_timer_timeout():
+	lift = false

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://sprites/axe.png" type="Texture" id=1]
 [ext_resource path="res://scripts/drop_the_axe.gd" type="Script" id=2]
-[ext_resource path="res://scenes/rope.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/trace.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/rope.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.23031
@@ -13,7 +14,9 @@ script = ExtResource( 2 )
 
 [node name="Position2D" type="Position2D" parent="."]
 
-[node name="rope" parent="Position2D" instance=ExtResource( 3 )]
+[node name="rope" parent="Position2D" instance=ExtResource( 4 )]
+
+[node name="trace" parent="Position2D" instance=ExtResource( 3 )]
 
 [node name="axe" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -22,5 +25,10 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Timer_fall_of_the_axe" type="Timer" parent="."]
+one_shot = true
+
+[node name="uncoupling" type="Timer" parent="."]
+one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_drop_the_axe_body_entered"]
 [connection signal="timeout" from="Timer_fall_of_the_axe" to="." method="_on_Timer_fall_of_the_axe_timeout"]
+[connection signal="timeout" from="uncoupling" to="." method="_on_uncoupling_timeout"]
