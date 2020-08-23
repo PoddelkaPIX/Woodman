@@ -17,5 +17,8 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Timer_fall_of_the_axe" type="Timer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_drop_the_axe_body_entered"]
 [connection signal="timeout" from="Timer_fall_of_the_axe" to="." method="_on_Timer_fall_of_the_axe_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
