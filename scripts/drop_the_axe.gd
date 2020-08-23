@@ -5,16 +5,14 @@ var velosity = Vector2()
 var returnn = false
 var rotate_num = 0.3
 var enter_the_player = false
-var oneshot = false
-
-func _ready():
-	oneshot = true
-	$Timer.start(.03)
+var oneshot = true
+	
 
 func _physics_process(delta):
 	if oneshot == true:
 		velosity = ((G.mouse_position - position).normalized() * speed) * delta
-		$Timer_fall_of_the_axe.start(.4)
+		$Timer_fall_of_the_axe.start(0.5)
+		oneshot = false
 	rotate(rotate_num)
 	if position.distance_to(G.player_position) > 225:
 		returnn = true 
@@ -40,7 +38,7 @@ func _on_drop_the_axe_body_entered(body):
 func _on_Timer_fall_of_the_axe_timeout():
 	enter_the_player = true
 	rotate_num = 0.15
-	velosity.y += 200
+	velosity.y += 4
 
 func _on_Timer_timeout():
 	oneshot = false
