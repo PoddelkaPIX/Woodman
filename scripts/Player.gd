@@ -62,7 +62,7 @@ func _physics_process(delta):
 		if shot == true:
 			if shot == true:
 				shot = false
-				$Timer_shot.start(0.5)
+				$Timers/Timer_shot.start(0.5)
 			shells -= 1
 			G.mouse_position = get_global_mouse_position()
 			var axe = AXE.instance()

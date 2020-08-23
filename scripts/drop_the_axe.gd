@@ -4,9 +4,11 @@ var velosity = Vector2()
 var returnn = false
 var rotate_num = 0.8
 var enter_the_player = false
+
 func _ready():
 	velosity = (G.mouse_position - position).normalized() * speed
 	$Timer_fall_of_the_axe.start(0.4)
+	
 func _process(delta):
 	rotate(rotate_num)
 	if position.distance_to(G.player_position) > 225:
