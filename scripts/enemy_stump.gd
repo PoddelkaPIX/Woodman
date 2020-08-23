@@ -3,7 +3,7 @@ extends KinematicBody2D
 const FLOOR = Vector2(0, -1)
 const SPEED = 30
 const JUMP = 350
-const GRAVITY = 10
+const GRAVITY = 150
 
 var move = true #может двигаться или нет
 var is_alive = true #жив или мёртв
@@ -16,7 +16,7 @@ var target = null
 var prev_pos
 var cd_toss = 1.5
 var jump = false
-
+var jump_speed = -200
 func _physics_process(delta):
 	var pos = position
 	$Label.text = str(health) #отображение количества hp
@@ -55,11 +55,22 @@ func _physics_process(delta):
 		$stump.flip_h = false
 		
 	search_for_target() 
-	velocity.y *= GRAVITY
 	animation()
 	jump()
 	velocity = move_and_slide(velocity, FLOOR)
-
+	
+func jump():
+	if $RayCast_jump.is_colliding():
+		jump = true
+		$Timer_fall.start(0.2)
+		
+	if jump == true:
+		velocity.y = jump_speed
+		jump_speed += 2
+		
+	elif jump == false:
+		jump_speed = -200
+		velocity.y += GRAVITY
 func animation():
 	var pl = get_parent().get_player()
 	if velocity.y < 0:
@@ -68,39 +79,13 @@ func animation():
 		$stump.play('attack')
 		velocity.x = 0
 	else:
-		$stump.play('run')
-		
-func jump():
-	if $RayCast_jump.is_colliding():
-		jump = true
-	else:
-		jump = false
-		
-	if jump == true:
-		velocity.y = -JUMP
-	
-	
-
-	
+		$stump.play('run')		
 		
 func search_for_target():
 	var pl = get_parent().get_player()
-	if toss == true: #подкидывание после пинка
-		cd_toss -= 0.1
-		move = false
-		if G.player_direction == 1:
-			velocity.x = 100
-			velocity.y = - 100
-		else:
-			velocity.x = - 100
-			velocity.y = - 100
-		if cd_toss <= 0:
-			velocity.x = 0
-			$Timer_move.start(0.5)
-			toss = false
-			cd_toss = 1.5	
+	
 		
-	elif position.distance_to(pl.position) < 20 or move == false:
+	if position.distance_to(pl.position) < 20 or move == false:
 		velocity.x = 0
 		
 	elif position.distance_to(pl.position) <= 200:
@@ -114,19 +99,12 @@ func search_for_target():
 		else:
 			direction = -1
 			
-	elif position.distance_to(pl.position) >= 300:
-		move = false
+	elif position.distance_to(pl.position) >= 500:
 		velocity.x = 0
 		target = null
-		$Timer_move.start(1)
 		$RayCast_jump.enabled = false
 		$RayCast_opinion.enabled = true
 		$RayCast_legs.enabled = true
-		
-	if $RayCast_jump.is_colliding():
-		jump = true
-	else:
-		jump = false
 		
 	if toss == true:
 		velocity.y = -10
@@ -142,13 +120,6 @@ func _on_Timer_attack_timeout():
 	move = true
 	$Area_attack/attack.disabled = false
 
-
-
-
-
-func _on_Timer_move_timeout():
-	move = true
-
-
-func _on_Timer_jump_timeout():
+func _on_Timer_fall_timeout():
 	jump = false
+

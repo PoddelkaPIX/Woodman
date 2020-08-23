@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://ground/Layer_0003_6.png" type="Texture" id=10]
 [ext_resource path="res://ground/Layer_0000_9.png" type="Texture" id=11]
 [ext_resource path="res://ground/Layer_0004_Lights.png" type="Texture" id=12]
-[ext_resource path="res://scenes/enemy_acorn.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/cursor.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -78,7 +77,7 @@ position = Vector2( 303.626, 326.157 )
 position = Vector2( 619.391, 109.53 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -195.767, 301.014 )
+position = Vector2( 1002.07, 198.403 )
 z_index = 1
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 6 )]
@@ -184,7 +183,7 @@ position = Vector2( 447.311, 1163.9 )
 position = Vector2( 85.7256, 1144.18 )
 
 [node name="enemy_stump6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 287.541, 1129.18 )
+position = Vector2( 320.068, 1134.84 )
 
 [node name="enemy_stump7" parent="." instance=ExtResource( 2 )]
 position = Vector2( 557.29, 1150.18 )
@@ -202,7 +201,7 @@ position = Vector2( -24.0722, 1154.07 )
 position = Vector2( -237.66, 1153.18 )
 
 [node name="enemy_stump4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 918.157, 210.603 )
+position = Vector2( 1109.39, 270.992 )
 
 [node name="enemy_stump2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1410.16, 216.139 )
@@ -257,9 +256,5 @@ modulate = Color( 1, 1, 1, 0.811765 )
 position = Vector2( 1983.79, -345.938 )
 scale = Vector2( 1.82178, 2.456 )
 texture = ExtResource( 12 )
-
-[node name="acorn" parent="." instance=ExtResource( 13 )]
-position = Vector2( 49.444, 344.725 )
-scale = Vector2( 0.5, 0.5 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]
 [connection signal="body_shape_entered" from="Area2D3" to="." method="_on_Area2D2_body_shape_entered"]

@@ -22,13 +22,8 @@
 [ext_resource path="res://sprites/stump/PENI_aseprite_aseprite_aseprite16.png" type="Texture" id=20]
 [ext_resource path="res://sprites/stump/PENI_aseprite_aseprite_aseprite3.png" type="Texture" id=21]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 15 ), ExtResource( 18 ), ExtResource( 21 ), ExtResource( 1 ), ExtResource( 17 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 13 ), ExtResource( 20 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 19 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "jump",
@@ -38,13 +33,18 @@ animations = [ {
 "loop": true,
 "name": "attack",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 18 ), ExtResource( 21 ), ExtResource( 1 ), ExtResource( 17 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 11.5262
 height = 10.1074
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10.3396, 12.1594 )
 
 [node name="enemy_stump" type="KinematicBody2D"]
@@ -54,13 +54,13 @@ script = ExtResource( 2 )
 
 [node name="stump" type="AnimatedSprite" parent="."]
 position = Vector2( 3.00981, -10.5794 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 animation = "run"
 flip_h = true
 
 [node name="enemy_hitBox" type="CollisionShape2D" parent="."]
 position = Vector2( 1.81192, 3.44314 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="RayCast_legs" type="RayCast2D" parent="."]
 position = Vector2( 7.81802, 16.0555 )
@@ -75,9 +75,9 @@ cast_to = Vector2( 0, 10 )
 collision_mask = 7
 
 [node name="RayCast_jump" type="RayCast2D" parent="."]
-position = Vector2( 19.3893, 16.5927 )
+position = Vector2( 10.0249, 17.5291 )
 rotation = -1.5708
-cast_to = Vector2( 0, 30 )
+cast_to = Vector2( 0, 40 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -7.21417
@@ -92,16 +92,12 @@ __meta__ = {
 
 [node name="attack" type="CollisionShape2D" parent="Area_attack"]
 position = Vector2( 20.0226, 3.00339 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="Timer_attack" type="Timer" parent="."]
 
-[node name="Timer_move" type="Timer" parent="."]
-
-[node name="Timer_jump" type="Timer" parent="."]
-one_shot = true
+[node name="Timer_fall" type="Timer" parent="."]
 [connection signal="body_entered" from="Area_attack" to="." method="_on_Area_attack_body_entered"]
 [connection signal="timeout" from="Timer_attack" to="." method="_on_Timer_attack_timeout"]
-[connection signal="timeout" from="Timer_move" to="." method="_on_Timer_move_timeout"]
-[connection signal="timeout" from="Timer_jump" to="." method="_on_Timer_jump_timeout"]
+[connection signal="timeout" from="Timer_fall" to="." method="_on_Timer_fall_timeout"]

@@ -23,5 +23,7 @@ func _on_AnimatedSprite_animation_finished():
 	jump = false
 
 
+
+
 func _on_Timer_timeout():
 	jump = false
