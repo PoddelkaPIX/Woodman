@@ -65,51 +65,38 @@ func _physics_process(delta):
 	else:
 		shift = false
 		twisting = false
-		
 	if Input.is_action_pressed("ui_shift") and cd_spin <= 0 and attack == false:
 		shift = true
 	else:
 		shift = false
-		
 	if Input.is_action_pressed("ui_lmb") and shells > 0:
-		
 		if shot == true:
-			
 			if shot == true:
 				shot = false
 				$Timers/Timer_shot.start(0.5)
-				
 			shells -= 1
 			G.mouse_position = get_global_mouse_position()
 			var axe = AXE.instance()
 			axe.position = $Position_attack.global_position
 			get_parent().add_child(axe)
-			
 	elif Input.is_action_pressed("ui_down"):
-		
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
 		
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
-		
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
-		
 		if velocity.x >= - speed_limit:
 			velocity.x -= 15
 		else:
 			velocity.x = - speed_limit
-			
 		direction = -1
-		
 	elif Input.is_action_pressed("ui_right") and spin == false and turn:
-		
 		if velocity.x <= speed_limit:
 			velocity.x += 15
 		else:
 			velocity.x = speed_limit
-			
 		direction = 1
 	
 	if Input.is_action_pressed("ui_up") and is_on_floor():
@@ -137,24 +124,20 @@ func _physics_process(delta):
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x)
 		$Particles/Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
-		
 	velocity.y += GRAVITY
 	twisting()
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
 	
 func twisting():
-	
 	if twisting == true and G.axe_velosity == true:
-		
 		if position.distance_to(G.axe_position) < 50:
 			lift = true
 			$Timers/lift_timer.start(0.3)
 		else:
 			velocity = (G.axe_position - position).normalized() * 300
-			
 	if lift == true:
-		velocity.y = -200
+		velocity.y = -300
 			
 	
 #машина состояний для анимации
@@ -174,12 +157,10 @@ func animation():
 			anim = 'run'
 		else:
 			anim = 'idle'
-			
 	if anim == 'run':
 		$Particles/Particles_run.emitting = true
 	else:
 		$Particles/Particles_run.emitting = false
-		
 	if anim == 'idle':
 		velocity.x = 0
 	
@@ -210,18 +191,14 @@ func _on_looting_timer_timeout(): #таймер выключающий нажа�
 	G.E_pressed = false
 
 func _on_Area_Attack_body_entered(body): #свойства атаки
-	
 	if 'enemy' in body.name:
 		velocity.x = 0
-		
 		if G.axe_is_taken == false: #обычная атака без усиления
 			print('hit')
 			body.health -= 5
 		else: #атака с усилением
 			body.health -= 10
-			
 		body.toss_attack = true
-		
 func _on_Area_kick_body_entered(body): #свойства пинка
 	if 'enemy' in body.name:
 		body.toss = true
