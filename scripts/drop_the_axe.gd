@@ -48,8 +48,6 @@ func _on_drop_the_axe_body_entered(body):
 			if not 'Player' == body.name:
 				returnn = true
 		else:
-			if shells_twisting == 1:
-				$uncoupling.start(0.5)
 			shells_twisting = 0
 			G.axe_velosity = true
 			velosity = Vector2()
@@ -70,5 +68,4 @@ func _on_Timer_fall_of_the_axe_timeout():
 
 
 func _on_uncoupling_timeout():
-	G.axe_velosity = false
-	velosity.y = 5
+	uncoupling = true
