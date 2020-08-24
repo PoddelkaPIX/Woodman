@@ -17,7 +17,7 @@ func _physics_process(delta):
 		
 	if oneshot == true:
 		velosity = ((G.mouse_position - position).normalized() * speed) * delta
-		$Timer_fall_of_the_axe.start(0.4)
+		$Timer_fall_of_the_axe.start(0.3)
 		oneshot = false
 		
 	if position.distance_to(G.player_position) > 225:
