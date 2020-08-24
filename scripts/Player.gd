@@ -137,7 +137,7 @@ func twisting():
 		else:
 			velocity = (G.axe_position - position).normalized() * 300
 	if lift == true:
-		velocity.y = -300
+		velocity.y = -200
 			
 	
 #машина состояний для анимации
