@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const AXE = preload("res://scenes/drop_the_axe.tscn")
+const HOOK = preload("res://scenes/drop_the_hook.tscn")
 const rope = preload("res://scenes/rope.tscn")
 const JUMP = 350
 const FLOOR = Vector2(0, -1)
@@ -20,7 +21,7 @@ var shot = true
 var turn = true #поворот
 var shift = false
 var twisting = false
-var lift = false
+var lift = true
 
 var cd_spin = 0
 var cd_attack = 0
@@ -41,7 +42,7 @@ func _ready():
 func _physics_process(delta):
 	G.player_direction = direction #передаём в глобальную переменную сторону взгляда игрока
 	cd_spin -= 1 * delta
-	cd_attack -= 1 * delta
+	
 	if heath <= 0:
 		get_tree().reload_current_scene()
 	
@@ -56,19 +57,26 @@ func _physics_process(delta):
 		else:
 			zoom = false
 	#кнопочки
-	if Input.is_action_just_pressed("E_pressed") and cd_attack <= 0:
+	if Input.is_action_just_pressed("E_pressed"):
 		G.E_pressed = true
 		$Timers/looting_timer.start() #длительность нажатия клавиши Е = 0.1 сек
 	
-	if Input.is_action_pressed("ui_rmb") and cd_attack <= 0 and attack == false:
-		twisting = true
-	else:
-		shift = false
-		twisting = false
-	if Input.is_action_pressed("ui_shift") and cd_spin <= 0 and attack == false:
+	if Input.is_action_just_pressed("ui_rmb") and shells > 0:
+		if shot == true:
+			if shot == true:
+				shot = false
+				$Timers/Timer_shot.start(0.5)
+			shells -= 1
+			G.mouse_position = get_global_mouse_position()
+			var hook = HOOK.instance()
+			hook.position = $Position_attack.global_position
+			get_parent().add_child(hook)
+			
+	if Input.is_action_pressed("ui_shift") and cd_spin <= 0:
 		shift = true
 	else:
 		shift = false
+		
 	if Input.is_action_pressed("ui_lmb") and shells > 0:
 		if shot == true:
 			if shot == true:
@@ -86,12 +94,14 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
+		
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
 		if velocity.x >= - speed_limit:
 			velocity.x -= 15
 		else:
 			velocity.x = - speed_limit
 		direction = -1
+		
 	elif Input.is_action_pressed("ui_right") and spin == false and turn:
 		if velocity.x <= speed_limit:
 			velocity.x += 15
@@ -109,6 +119,7 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		GRAVITY = 10
+		
 	#управление шейпами
 	if spin == true:
 		if direction == 1:
@@ -124,21 +135,20 @@ func _physics_process(delta):
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x)
 		$Particles/Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
+		
 	velocity.y += GRAVITY
 	twisting()
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
 	
-func twisting():
-	if twisting == true and G.axe_velosity == true:
-		if position.distance_to(G.axe_position) < 50:
-			lift = true
-			$Timers/lift_timer.start(0.3)
-		else:
-			velocity = (G.axe_position - position).normalized() * 300
-	if lift == true:
-		velocity.y = -200
-			
+func twisting(): #скручивание
+	if velocity.y < -20 and G.axe_stuck == true:
+		velocity = (G.axe_position - position).normalized() * 400
+		
+		if lift == true and position.distance_to(G.axe_position) < 100:
+			$Timers/lift_timer.start(0.1)
+			velocity.y = -300
+
 	
 #машина состояний для анимации
 func animation():

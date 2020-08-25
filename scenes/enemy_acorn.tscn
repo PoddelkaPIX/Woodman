@@ -14,6 +14,11 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "detonation",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "run",
@@ -23,17 +28,13 @@ animations = [ {
 "loop": true,
 "name": "boom",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "detonation",
-"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 27.0126
 
 [node name="enemy_acorn" type="KinematicBody2D"]
+collision_layer = 5
 collision_mask = 0
 script = ExtResource( 6 )
 
