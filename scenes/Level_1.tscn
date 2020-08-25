@@ -77,7 +77,7 @@ position = Vector2( 303.626, 326.157 )
 position = Vector2( 619.391, 109.53 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2123.13, 1087.67 )
+position = Vector2( 391.157, 328.287 )
 z_index = 1
 collision_layer = 2147483649
 

@@ -142,7 +142,7 @@ func _physics_process(delta):
 	animation()
 	
 func twisting(): #скручивание
-	if velocity.y < -20 and G.axe_stuck == true:
+	if velocity.y < -10 and G.axe_stuck == true:
 		velocity = (G.axe_position - position).normalized() * 400
 		
 		if lift == true and position.distance_to(G.axe_position) < 100:
