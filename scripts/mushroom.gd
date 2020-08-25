@@ -13,8 +13,9 @@ func _process(delta):
 		$AnimatedSprite.play('jump')
 	else:
 		$AnimatedSprite.play('idle')
+		
 func _on_mushroom_body_entered(body):
-	if 'Player' in body.name and body.velocity.y > 50:
+	if 'Player' in body.name and body.velocity.y > 10:
 		jump = true
 		body.velocity.y = -560
 

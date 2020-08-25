@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/axe.png" type="Texture" id=1]
 [ext_resource path="res://scripts/drop_the_axe.gd" type="Script" id=2]
 [ext_resource path="res://scenes/trace.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/rope.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.23031
@@ -13,8 +12,6 @@ collision_layer = 4
 script = ExtResource( 2 )
 
 [node name="Position2D" type="Position2D" parent="."]
-
-[node name="rope" parent="Position2D" instance=ExtResource( 4 )]
 
 [node name="trace" parent="Position2D" instance=ExtResource( 3 )]
 

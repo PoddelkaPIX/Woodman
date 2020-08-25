@@ -43,6 +43,8 @@ func _physics_process(delta):
 	if position.distance_to(G.player_position) <= 10 and returnn == true:
 		get_parent().get_player().shells += 1
 		get_parent().get_player().lift = true
+		get_parent().get_player().axe_in_hand = true
+		get_parent().get_player().timer_shot()
 		queue_free()
 		
 	if stuck:

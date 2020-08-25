@@ -20,7 +20,7 @@ func _physics_process(delta):
 		$Timer_fall_of_the_axe.start(0.3)
 		oneshot = false
 		
-	if position.distance_to(G.player_position) > 225:
+	if position.distance_to(G.player_position) > 150:
 		returnn = true 
 		
 	if returnn == true:
@@ -30,6 +30,8 @@ func _physics_process(delta):
 	
 	if position.distance_to(G.player_position) <= 10 and returnn == true:
 		get_parent().get_player().shells += 1
+		get_parent().get_player().axe_in_hand = true
+		get_parent().get_player().timer_shot()
 		queue_free()
 		
 	translate(velosity)

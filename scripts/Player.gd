@@ -17,11 +17,12 @@ var kick = false
 var attack = false
 var hit = false
 var zoom = false
-var shot = true
+var shot = false
 var turn = true #поворот
 var shift = false
 var twisting = false
 var lift = true
+var axe_in_hand = true
 
 var cd_spin = 0
 var cd_attack = 0
@@ -34,6 +35,7 @@ onready var Anim = $AnimationPlayer
 onready var ui = get_viewport().get_node("res://scenes/UI.tscn")
 
 func _ready():
+	$Timers/Timer_shot.start(0.4)
 	$Timers/camera_zoom.start()
 	$Camera2D.set_zoom(Vector2(camera_zoom_x, camera_zoom_y))
 	G.axe_is_taken = false
@@ -63,30 +65,24 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_rmb") and shells > 0:
 		if shot == true:
-			if shot == true:
-				shot = false
-				$Timers/Timer_shot.start(0.5)
+			shot = false
+			axe_in_hand = false
 			shells -= 1
 			G.mouse_position = get_global_mouse_position()
 			var hook = HOOK.instance()
 			hook.position = $Position_attack.global_position
 			get_parent().add_child(hook)
-			
-	if Input.is_action_pressed("ui_shift") and cd_spin <= 0:
-		shift = true
-	else:
-		shift = false
 		
 	if Input.is_action_pressed("ui_lmb") and shells > 0:
 		if shot == true:
-			if shot == true:
-				shot = false
-				$Timers/Timer_shot.start(0.5)
+			shot = false
+			axe_in_hand = false
 			shells -= 1
 			G.mouse_position = get_global_mouse_position()
 			var axe = AXE.instance()
 			axe.position = $Position_attack.global_position
 			get_parent().add_child(axe)
+		
 	elif Input.is_action_pressed("ui_down"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
@@ -141,6 +137,13 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
 	
+	
+func timer_shot():
+	$Timers/Timer_shot.start(0.3)
+	
+func hit():
+	velocity.y = - 50
+	
 func twisting(): #скручивание
 	if velocity.y < -10 and G.axe_stuck == true:
 		velocity = (G.axe_position - position).normalized() * 400
@@ -152,9 +155,9 @@ func twisting(): #скручивание
 	
 #машина состояний для анимации
 func animation():
-	if jump == true and not is_on_floor() and attack == false and kick == false and spin == false:
+	if jump == true and not is_on_floor() and attack == false and spin == false:
 		anim = 'jump'
-	elif jump == false and not is_on_floor() and attack == false and kick == false and spin == false:
+	elif jump == false and not is_on_floor() and attack == false and spin == false:
 		anim = 'fall'
 	else:
 		if spin == true:
@@ -164,14 +167,21 @@ func animation():
 		elif attack == true:
 			anim = 'attack1'
 		elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
-			anim = 'run'
+			if axe_in_hand == true:
+				anim = 'run'
+			else:
+				anim = 'run2'
 		else:
-			anim = 'idle'
-	if anim == 'run':
+			if axe_in_hand == true:
+				anim = 'idle'
+			else:
+				anim = 'idle2'
+				
+	if anim == 'run' or anim == 'run2':
 		$Particles/Particles_run.emitting = true
 	else:
 		$Particles/Particles_run.emitting = false
-	if anim == 'idle':
+	if anim == 'idle' or anim == 'idle2':
 		velocity.x = 0
 	
 	Anim.play(anim)
@@ -209,6 +219,7 @@ func _on_Area_Attack_body_entered(body): #свойства атаки
 		else: #атака с усилением
 			body.health -= 10
 		body.toss_attack = true
+		
 func _on_Area_kick_body_entered(body): #свойства пинка
 	if 'enemy' in body.name:
 		body.toss = true
