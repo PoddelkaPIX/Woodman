@@ -65,6 +65,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("ui_rmb") and shells > 0:
 		if shot == true:
+			attack = true
 			shot = false
 			axe_in_hand = false
 			shells -= 1
@@ -75,6 +76,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("ui_lmb") and shells > 0:
 		if shot == true:
+			attack = true
 			shot = false
 			axe_in_hand = false
 			shells -= 1
