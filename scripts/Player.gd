@@ -3,11 +3,11 @@ extends KinematicBody2D
 const AXE = preload("res://scenes/drop_the_axe.tscn")
 const HOOK = preload("res://scenes/drop_the_hook.tscn")
 const rope = preload("res://scenes/rope.tscn")
-const JUMP = 350
+const JUMP = 300
 const FLOOR = Vector2(0, -1)
 
 var shells = 1 #снаряды
-var GRAVITY = 10
+var GRAVITY = 5
 var speed_limit = 225 #ограничение по скорости игрока
 var velocity = Vector2()
 var direction = 1

@@ -25,7 +25,7 @@ func _physics_process(delta):
 		$Timer_fall_of_the_axe.start(0.3)
 		oneshot = false
 		
-	if position.distance_to(G.player_position) < 50 and stuck == true:
+	if position.distance_to(G.player_position) < 70 and stuck == true:
 		ret = true
 	elif ret == true and position.distance_to(G.player_position) > 40:
 		returnn = true

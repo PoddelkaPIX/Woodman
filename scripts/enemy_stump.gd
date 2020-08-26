@@ -17,7 +17,7 @@ var prev_pos
 var cd_toss = 1.5
 var jump = false
 var jump_speed = -200
-
+var attack_jump = false
 func _physics_process(delta):
 	var pos = position
 	$Label.text = str(health) #отображение количества hp
@@ -58,8 +58,17 @@ func _physics_process(delta):
 	search_for_target() 
 	animation()
 	jump()
+	attack_jump()
 	velocity = move_and_slide(velocity, FLOOR)
 	
+func attack_jump():
+	if $RayCast_attack_jump.is_colliding():
+		print('11111')
+		attack_jump = true
+	if attack_jump == true:
+		velocity.y = -50
+		$Timer_attack_jump.start(1)
+			
 func jump():
 	var pl = get_parent().get_player()
 	if $RayCast_jump.is_colliding() and position.distance_to(pl.position) > 100:
@@ -132,3 +141,7 @@ func _on_stump_animation_finished():
 		$Area_attack/attack.disabled = false
 		$Timer_attack.start(0.2)
 		
+
+
+func _on_Timer_attack_jump_timeout():
+	attack_jump = false
