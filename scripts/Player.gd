@@ -42,6 +42,7 @@ func _ready():
 	$UI/Control/axe.visible = false
 
 func _physics_process(delta):
+	print((global_position - get_global_mouse_position()).normalized())
 	G.player_direction = direction #передаём в глобальную переменную сторону взгляда игрока
 	cd_spin -= 1 * delta
 	
@@ -155,6 +156,7 @@ func twisting(): #скручивание
 
 #машина состояний для анимации
 func animation():
+	var klick = (global_position - get_global_mouse_position()).normalized()
 	if jump == true and not is_on_floor() and attack == false and spin == false:
 		anim = 'jump'
 	elif jump == false and not is_on_floor() and attack == false and spin == false:
@@ -165,7 +167,18 @@ func animation():
 		elif kick == true:
 			anim = 'kick'
 		elif attack == true:
-			anim = 'attack1'
+			
+			if direction == 1:
+				if klick.x < 0:
+					anim = 'attack1'
+				else:
+					anim = 'attack2'
+			else:
+				if klick.x > 0:
+					anim = 'attack1'
+				else:
+					anim = 'attack2'
+					
 		elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
 			if axe_in_hand == true:
 				anim = 'run'
