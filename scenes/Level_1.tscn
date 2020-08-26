@@ -78,7 +78,7 @@ position = Vector2( 303.626, 326.157 )
 position = Vector2( 619.391, 109.53 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 391.157, 328.287 )
+position = Vector2( 235, 313 )
 z_index = 1
 collision_layer = 2147483649
 
@@ -280,6 +280,6 @@ scale = Vector2( 1.82178, 2.456 )
 texture = ExtResource( 12 )
 
 [node name="Node2D" parent="." instance=ExtResource( 13 )]
-position = Vector2( 473.5, 295 )
+position = Vector2( 1494, 126 )
 [connection signal="body_shape_entered" from="Area2D2" to="." method="_on_Area2D2_body_shape_entered"]
 [connection signal="body_shape_entered" from="Area2D3" to="." method="_on_Area2D2_body_shape_entered"]

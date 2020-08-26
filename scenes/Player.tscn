@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -18,8 +18,70 @@ script/source = "extends Camera2D
 "
 
 [sub_resource type="Animation" id=4]
-length = 0.3
-step = 0.05
+resource_name = "RunAttack"
+length = 0.1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 93, 94, 95, 96 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_attack_end"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "RunAttack2"
+length = 0.1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 97, 98, 99, 100 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_attack_end"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.1
+step = 0.025
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -27,7 +89,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -41,14 +103,44 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.15, 0.2 ),
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 92, 93, 94, 95 ]
+"values": [ 102, 103, 104, 105 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "dead"
+[sub_resource type="Animation" id=7]
+resource_name = "attack2"
+length = 0.1
+step = 0.025
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_attack_end"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 106, 107, 108, 109 ]
+}
+
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -63,7 +155,7 @@ tracks/0/keys = {
 "values": [ 0, 89, 90, 91 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Player/Sprite:frame")
 tracks/0/interp = 1
@@ -77,7 +169,7 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=10]
 length = 1.1
 loop = true
 tracks/0/type = "value"
@@ -93,7 +185,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 length = 1.1
 loop = true
 tracks/0/type = "value"
@@ -109,7 +201,7 @@ tracks/0/keys = {
 "values": [ 56, 57, 58, 59, 60, 61, 62 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=12]
 length = 1.05
 loop = true
 step = 0.05
@@ -126,7 +218,7 @@ tracks/0/keys = {
 "values": [ 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=13]
 length = 1.05
 loop = true
 step = 0.075
@@ -143,7 +235,7 @@ tracks/0/keys = {
 "values": [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=14]
 length = 1.05
 loop = true
 step = 0.075
@@ -160,7 +252,7 @@ tracks/0/keys = {
 "values": [ 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=15]
 length = 0.65
 step = 0.05
 tracks/0/type = "value"
@@ -214,7 +306,7 @@ tracks/3/keys = {
 "values": [ 42.0, 21.0, 21.0, 42.0 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=16]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Player/Sprite:frame")
 tracks/0/interp = 1
@@ -308,21 +400,24 @@ script = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 13 )
-vframes = 6
+vframes = 7
 hframes = 17
-frame = 91
+frame = 110
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack1 = SubResource( 4 )
-anims/dead = SubResource( 5 )
-anims/fall = SubResource( 6 )
-anims/idle = SubResource( 7 )
-anims/idle2 = SubResource( 8 )
-anims/jump = SubResource( 9 )
-anims/run = SubResource( 10 )
-anims/run2 = SubResource( 11 )
-anims/spin = SubResource( 12 )
-anims/spin_attack = SubResource( 13 )
+anims/RunAttack = SubResource( 4 )
+anims/RunAttack2 = SubResource( 5 )
+anims/attack1 = SubResource( 6 )
+anims/attack2 = SubResource( 7 )
+anims/dead = SubResource( 8 )
+anims/fall = SubResource( 9 )
+anims/idle = SubResource( 10 )
+anims/idle2 = SubResource( 11 )
+anims/jump = SubResource( 12 )
+anims/run = SubResource( 13 )
+anims/run2 = SubResource( 14 )
+anims/spin = SubResource( 15 )
+anims/spin_attack = SubResource( 16 )
 
 [node name="Position_attack" type="Position2D" parent="."]
 position = Vector2( -1.68369, 8.14947 )

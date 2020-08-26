@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/GhostTrail.gd" type="Script" id=1]
 
 [node name="Sprite" type="Sprite"]
-vframes = 6
+vframes = 7
 hframes = 17
 frame = 1
 script = ExtResource( 1 )
