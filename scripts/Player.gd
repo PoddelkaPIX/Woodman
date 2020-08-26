@@ -72,7 +72,7 @@ func _physics_process(delta):
 			var hook = HOOK.instance()
 			hook.position = $Position_attack.global_position
 			get_parent().add_child(hook)
-		
+	
 	if Input.is_action_pressed("ui_lmb") and shells > 0:
 		if shot == true:
 			shot = false
@@ -82,28 +82,28 @@ func _physics_process(delta):
 			var axe = AXE.instance()
 			axe.position = $Position_attack.global_position
 			get_parent().add_child(axe)
-		
+	
 	elif Input.is_action_pressed("ui_down"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
-		
+	
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(1)
-		
+	
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
+		direction = -1
 		if velocity.x >= - speed_limit:
 			velocity.x -= 15
 		else:
 			velocity.x = - speed_limit
-		direction = -1
-		
+	
 	elif Input.is_action_pressed("ui_right") and spin == false and turn:
+		direction = 1
 		if velocity.x <= speed_limit:
 			velocity.x += 15
 		else:
 			velocity.x = speed_limit
-		direction = 1
 	
 	if Input.is_action_pressed("ui_up") and is_on_floor():
 		$Timers/gravity_timer.start()
@@ -115,7 +115,7 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		GRAVITY = 10
-		
+	
 	#управление шейпами
 	if spin == true:
 		if direction == 1:
@@ -131,28 +131,26 @@ func _physics_process(delta):
 		$PlayerHitbox.position.x = abs($PlayerHitbox.position.x)
 		$Particles/Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
-		
+	
 	velocity.y += GRAVITY
 	twisting()
 	velocity = move_and_slide(velocity, FLOOR)
 	animation()
-	
-	
+
 func timer_shot():
 	$Timers/Timer_shot.start(0.3)
-	
+
 func hit():
 	velocity.y = - 50
-	
+
 func twisting(): #скручивание
 	if velocity.y < -10 and G.axe_stuck == true:
 		velocity = (G.axe_position - position).normalized() * 400
-		
+	
 		if lift == true and position.distance_to(G.axe_position) < 100:
 			$Timers/lift_timer.start(0.1)
 			velocity.y = -300
 
-	
 #машина состояний для анимации
 func animation():
 	if jump == true and not is_on_floor() and attack == false and spin == false:
@@ -176,7 +174,7 @@ func animation():
 				anim = 'idle'
 			else:
 				anim = 'idle2'
-				
+	
 	if anim == 'run' or anim == 'run2':
 		$Particles/Particles_run.emitting = true
 	else:
@@ -213,13 +211,13 @@ func _on_looting_timer_timeout(): #таймер выключающий нажа�
 func _on_Area_Attack_body_entered(body): #свойства атаки
 	if 'enemy' in body.name:
 		velocity.x = 0
+		body.toss_attack = true
 		if G.axe_is_taken == false: #обычная атака без усиления
 			print('hit')
 			body.health -= 5
 		else: #атака с усилением
 			body.health -= 10
-		body.toss_attack = true
-		
+
 func _on_Area_kick_body_entered(body): #свойства пинка
 	if 'enemy' in body.name:
 		body.toss = true
@@ -233,7 +231,7 @@ func _on_camera_zoom_timeout():
 	zoom = true
 
 func _on_ghost_trail_timeout():
-	if spin == true:
+	if spin == true or anim == 'fall':
 		var trail = preload("res://scenes/GhostTrail.tscn").instance()
 		trail.global_position = $Sprite.global_position
 		trail.flip_h = $Sprite.flip_h
@@ -242,10 +240,8 @@ func _on_ghost_trail_timeout():
 		get_tree().get_root().add_child(trail)
 		trail.scale = $Sprite.scale
 
-
 func _on_Timer_shot_timeout():
 	shot = true
-
 
 func _on_lift_timer_timeout():
 	lift = false
