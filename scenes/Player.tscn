@@ -31,7 +31,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 93, 94, 95, 96 ]
+"values": [ 110, 111, 112, 113 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -62,7 +62,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 97, 98, 99, 100 ]
+"values": [ 114, 115, 116, 117 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -402,7 +402,7 @@ script = SubResource( 3 )
 texture = ExtResource( 13 )
 vframes = 7
 hframes = 17
-frame = 105
+frame = 114
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RunAttack = SubResource( 4 )
