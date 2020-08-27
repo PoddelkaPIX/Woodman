@@ -166,7 +166,7 @@ func animation():
 			anim = 'spin'
 		elif kick == true:
 			anim = 'kick'
-		elif attack == true:
+		elif attack == true and velocity.x == 0:
 			
 			if direction == 1:
 				if klick.x < 0:
@@ -180,10 +180,21 @@ func animation():
 					anim = 'attack2'
 					
 		elif Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
-			if axe_in_hand == true:
+			if axe_in_hand == true and attack == false:
 				anim = 'run'
 			else:
 				anim = 'run2'
+			if attack == true and velocity.x != 0:
+				if direction == 1:
+					if klick.x < 0:
+						anim = 'RunAttack'
+					else:
+						anim = 'RunAttack2'
+				else:
+					if klick.x > 0:
+						anim = 'RunAttack'
+					else:
+						anim = 'RunAttack2'
 		else:
 			if axe_in_hand == true:
 				anim = 'idle'
