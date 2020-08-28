@@ -39,6 +39,7 @@ animations = [ {
 extents = Vector2( 11, 29 )
 
 [node name="mushroom" type="Area2D"]
+z_index = 2
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

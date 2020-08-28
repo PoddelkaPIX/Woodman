@@ -64,7 +64,6 @@ position = Vector2( 618.391, 133.53 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 658, 304 )
-z_index = 1
 collision_layer = 2147483649
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 6 )]
@@ -252,6 +251,7 @@ shape = SubResource( 2 )
 
 [node name="Rock1" type="StaticBody2D" parent="Backi"]
 position = Vector2( -1008, 0 )
+z_index = 2
 collision_layer = 17
 collision_mask = 5
 
@@ -265,6 +265,7 @@ shape = SubResource( 3 )
 
 [node name="Rock2" type="StaticBody2D" parent="Backi"]
 position = Vector2( -960, 0 )
+z_index = 2
 collision_layer = 17
 collision_mask = 5
 
@@ -278,6 +279,7 @@ shape = SubResource( 4 )
 
 [node name="Rock3" type="StaticBody2D" parent="Backi"]
 position = Vector2( -1064, 0 )
+z_index = 2
 collision_layer = 17
 collision_mask = 5
 
@@ -291,6 +293,7 @@ shape = SubResource( 5 )
 
 [node name="Rock4" type="StaticBody2D" parent="Backi"]
 position = Vector2( -1128, 0 )
+z_index = 2
 collision_layer = 17
 collision_mask = 5
 
@@ -304,6 +307,7 @@ shape = SubResource( 6 )
 
 [node name="Rock5" type="StaticBody2D" parent="Backi"]
 position = Vector2( -888, 0 )
+z_index = 2
 collision_layer = 17
 collision_mask = 5
 
