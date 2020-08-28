@@ -19,7 +19,7 @@ script/source = "extends Camera2D
 
 [sub_resource type="Animation" id=4]
 resource_name = "RunAttack"
-length = 0.1
+length = 0.2
 step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -28,10 +28,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 110, 111, 112, 113 ]
+"times": PoolRealArray( 0, 0.025, 0.05, 0.1, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 110, 111, 112, 113, 110 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -40,7 +40,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -50,7 +50,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "RunAttack2"
-length = 0.1
+length = 0.2
 step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -59,10 +59,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 114, 115, 116, 117 ]
+"times": PoolRealArray( 0, 0.025, 0.05, 0.1, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 114, 115, 116, 117, 114 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -71,7 +71,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -80,7 +80,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-length = 0.1
+length = 0.2
 step = 0.025
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -89,7 +89,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -103,15 +103,15 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 102, 103, 104, 105 ]
+"times": PoolRealArray( 0, 0.025, 0.05, 0.1, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 102, 103, 104, 105, 102 ]
 }
 
 [sub_resource type="Animation" id=7]
 resource_name = "attack2"
-length = 0.1
+length = 0.2
 step = 0.025
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -120,7 +120,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -134,10 +134,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.025, 0.05, 0.075 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 106, 107, 108, 109 ]
+"times": PoolRealArray( 0, 0.025, 0.05, 0.1, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 106, 107, 108, 109, 106 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -402,7 +402,7 @@ script = SubResource( 3 )
 texture = ExtResource( 13 )
 vframes = 7
 hframes = 17
-frame = 114
+frame = 117
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RunAttack = SubResource( 4 )
