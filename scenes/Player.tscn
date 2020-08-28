@@ -402,7 +402,6 @@ script = SubResource( 3 )
 texture = ExtResource( 13 )
 vframes = 7
 hframes = 17
-frame = 117
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RunAttack = SubResource( 4 )

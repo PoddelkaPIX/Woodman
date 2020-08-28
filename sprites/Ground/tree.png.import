@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dark.png-7e232619685a27ddd13215b2eca6cfa8.stex"
+path="res://.import/tree.png-43a580951bc86230fac9bd2977f90c57.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dark.png"
-dest_files=[ "res://.import/dark.png-7e232619685a27ddd13215b2eca6cfa8.stex" ]
+source_file="res://sprites/Ground/tree.png"
+dest_files=[ "res://.import/tree.png-43a580951bc86230fac9bd2977f90c57.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

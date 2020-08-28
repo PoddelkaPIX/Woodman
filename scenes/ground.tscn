@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://sprites/Platform.png" type="Texture" id=1]
-[ext_resource path="res://sprites/dark.png" type="Texture" id=2]
+[ext_resource path="res://sprites/Ground/Platform.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Ground/dark.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 384, 63 )
