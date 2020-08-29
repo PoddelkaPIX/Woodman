@@ -42,7 +42,6 @@ position = Vector2( 618.016, 124.166 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -268.124, 314.381 )
-z_index = 1
 collision_layer = 2147483649
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 6 )]
