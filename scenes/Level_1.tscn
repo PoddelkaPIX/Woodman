@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -21,6 +21,9 @@
 [ext_resource path="res://sprites/Ground/NJpen2.png" type="Texture" id=19]
 [ext_resource path="res://sprites/Ground/NJpen3.png" type="Texture" id=20]
 [ext_resource path="res://sprites/Ground/NJpen1.png" type="Texture" id=21]
+[ext_resource path="res://sprites/Ground/rock6.png" type="Texture" id=22]
+[ext_resource path="res://scenes/AnglePlat.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/BockPlat.tscn" type="PackedScene" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -29,7 +32,7 @@ extents = Vector2( 10, 106 )
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 21.0
+radius = 35.0
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 10.0499
@@ -200,21 +203,28 @@ position = Vector2( 408, 1261 )
 [node name="StaticBody2D3" parent="Platforms" instance=ExtResource( 6 )]
 position = Vector2( 1153, 371 )
 
-[node name="StaticBody2D8" parent="Platforms" instance=ExtResource( 6 )]
-position = Vector2( 1587, 50 )
-rotation = -1.5708
+[node name="BockPlat" parent="Platforms" instance=ExtResource( 24 )]
+position = Vector2( -767, 940 )
 
-[node name="StaticBody2D11" parent="Platforms" instance=ExtResource( 6 )]
-position = Vector2( 842, 870 )
-rotation = -1.5708
+[node name="BockPlat2" parent="Platforms" instance=ExtResource( 24 )]
+position = Vector2( -767, 172 )
 
-[node name="StaticBody2D9" parent="Platforms" instance=ExtResource( 6 )]
-position = Vector2( -799, 174 )
-rotation = 1.5708
+[node name="BockPlat3" parent="Platforms" instance=ExtResource( 24 )]
+position = Vector2( 1562, 50 )
+rotation = 3.14159
 
-[node name="StaticBody2D10" parent="Platforms" instance=ExtResource( 6 )]
-position = Vector2( -799, 940 )
-rotation = 1.5708
+[node name="BockPlat4" parent="Platforms" instance=ExtResource( 24 )]
+position = Vector2( 807, 940 )
+rotation = 3.14159
+
+[node name="AnglePlat" parent="Platforms" instance=ExtResource( 23 )]
+position = Vector2( 312, -132 )
+
+[node name="AnglePlat2" parent="Platforms" instance=ExtResource( 23 )]
+position = Vector2( 568, -164 )
+
+[node name="AnglePlat3" parent="Platforms" instance=ExtResource( 23 )]
+position = Vector2( 824, -196 )
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -254,6 +264,19 @@ position = Vector2( 0, -4 )
 texture = ExtResource( 17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/rock5"]
+shape = SubResource( 3 )
+
+[node name="rock6" type="StaticBody2D" parent="Objects"]
+position = Vector2( -333, 318 )
+z_index = 2
+collision_layer = 17
+collision_mask = 5
+
+[node name="rock6" type="Sprite" parent="Objects/rock6"]
+texture = ExtResource( 22 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/rock6"]
+position = Vector2( -1, 6 )
 shape = SubResource( 3 )
 
 [node name="rock2" type="StaticBody2D" parent="Objects"]
