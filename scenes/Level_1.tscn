@@ -233,6 +233,8 @@ position = Vector2( 618, 132 )
 [node name="rock1" type="StaticBody2D" parent="Objects"]
 position = Vector2( -317, -106 )
 z_index = 2
+collision_layer = 17
+collision_mask = 5
 
 [node name="rock1" type="Sprite" parent="Objects/rock1"]
 position = Vector2( 0, -3 )
@@ -244,6 +246,8 @@ shape = SubResource( 2 )
 [node name="rock5" type="StaticBody2D" parent="Objects"]
 position = Vector2( -469, -117 )
 z_index = 2
+collision_layer = 17
+collision_mask = 5
 
 [node name="rock5" type="Sprite" parent="Objects/rock5"]
 position = Vector2( 0, -4 )
@@ -255,6 +259,8 @@ shape = SubResource( 3 )
 [node name="rock2" type="StaticBody2D" parent="Objects"]
 position = Vector2( -161, -109 )
 z_index = 2
+collision_layer = 17
+collision_mask = 5
 
 [node name="rock2" type="Sprite" parent="Objects/rock2"]
 position = Vector2( 1, -2 )
@@ -266,6 +272,8 @@ shape = SubResource( 4 )
 [node name="rock3" type="StaticBody2D" parent="Objects"]
 position = Vector2( -111, -109 )
 z_index = 2
+collision_layer = 17
+collision_mask = 5
 
 [node name="rock3" type="Sprite" parent="Objects/rock3"]
 position = Vector2( -2, -2 )
@@ -277,6 +285,8 @@ shape = SubResource( 5 )
 [node name="rock4" type="StaticBody2D" parent="Objects"]
 position = Vector2( -39, -109 )
 z_index = 2
+collision_layer = 17
+collision_mask = 5
 
 [node name="rock4" type="Sprite" parent="Objects/rock4"]
 position = Vector2( 1, -5 )
@@ -287,6 +297,8 @@ position = Vector2( 2, -1 )
 shape = SubResource( 6 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Objects"]
+collision_layer = 17
+collision_mask = 5
 
 [node name="drevo1" type="Sprite" parent="Objects/StaticBody2D"]
 position = Vector2( 54, -126 )
