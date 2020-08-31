@@ -1,7 +1,7 @@
 extends Area2D
 
 var speed = 450
-var velosity = Vector2()
+var velocity = Vector2()
 var returnn = false
 var rotate_num = 0.3
 var enter_the_player = false
@@ -16,7 +16,7 @@ func _physics_process(delta):
 	rotate(rotate_num)
 		
 	if oneshot == true:
-		velosity = ((G.mouse_position - position).normalized() * speed) * delta
+		velocity = ((G.mouse_position - position).normalized() * speed) * delta
 		$Timer_fall_of_the_axe.start(0.3)
 		oneshot = false
 		
@@ -26,7 +26,7 @@ func _physics_process(delta):
 	if returnn == true:
 		if speed <= 1000:
 			speed += 25
-		velosity = ((G.player_position - position).normalized() * speed) * delta
+		velocity = ((G.player_position - position).normalized() * speed) * delta
 	
 	if position.distance_to(G.player_position) <= 10 and returnn == true:
 		get_parent().get_player().shells += 1
@@ -34,7 +34,7 @@ func _physics_process(delta):
 		get_parent().get_player().timer_shot()
 		queue_free()
 		
-	translate(velosity)
+	translate(velocity)
 
 func _on_drop_the_axe_body_entered(body):
 	if not 'Player' in body.name:
@@ -48,6 +48,6 @@ func _on_Timer_fall_of_the_axe_timeout():
 	if player.shift == false:
 		enter_the_player = true
 		rotate_num = 0.15
-		velosity.y += 3
+		velocity.y += 3
 	else:
 		rotate_num = 0

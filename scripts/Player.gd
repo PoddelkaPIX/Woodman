@@ -7,7 +7,7 @@ const JUMP = 300
 const FLOOR = Vector2(0, -1)
 
 var shells = 1 #снаряды
-var GRAVITY = 5
+var gravity = 5
 var speed_limit = 225 #ограничение по скорости игрока
 var velocity = Vector2()
 var direction = 1
@@ -42,7 +42,6 @@ func _ready():
 	$UI/Control/axe.visible = false
 
 func _physics_process(delta):
-	print((global_position - get_global_mouse_position()).normalized())
 	G.player_direction = direction #передаём в глобальную переменную сторону взгляда игрока
 	cd_spin -= 1 * delta
 	
@@ -117,7 +116,7 @@ func _physics_process(delta):
 			velocity.y = -JUMP/2
 	
 	if is_on_floor():
-		GRAVITY = 10
+		gravity = 10
 	
 	#управление шейпами
 	if spin == true:
@@ -135,11 +134,12 @@ func _physics_process(delta):
 		$Particles/Particles_run.rotation_degrees = 77
 		$Sprite.flip_h = true
 	
-	velocity.y += GRAVITY
+	velocity.y += gravity
 	twisting()
 	velocity = move_and_slide(velocity, FLOOR)
+	
 	animation()
-
+		
 func timer_shot():
 	$Timers/Timer_shot.start(0.3)
 
@@ -251,7 +251,7 @@ func _on_Area_kick_body_entered(body): #свойства пинка
 		body.health -= 1
 
 func _on_gravity_timer_timeout():
-	GRAVITY = 15
+	gravity = 15
 
 func _on_camera_zoom_timeout():
 	zoom = true

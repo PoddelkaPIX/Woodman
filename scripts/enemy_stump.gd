@@ -70,7 +70,7 @@ func attack_jump():
 		$Timer_attack_jump.start(1)
 			
 func jump():
-	var pl = get_parent().get_player()
+	var pl = get_parent().get_parent().get_player()
 	if $RayCast_jump.is_colliding() and position.distance_to(pl.position) > 100:
 		jump = true
 		$Timer_fall.start(0.2)
@@ -83,7 +83,7 @@ func jump():
 		jump_speed = -200
 		velocity.y += GRAVITY
 func animation():
-	var pl = get_parent().get_player()
+	var pl = get_parent().get_parent().get_player()
 	if velocity.y < 0:
 		$stump.play('jump')
 	elif position.distance_to(pl.position) < 30:
@@ -93,7 +93,7 @@ func animation():
 		$stump.play('run')		
 		
 func search_for_target():
-	var pl = get_parent().get_player()
+	var pl = get_parent().get_parent().get_player()
 	
 		
 	if position.distance_to(pl.position) < 20 or move == false:
