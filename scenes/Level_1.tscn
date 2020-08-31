@@ -12,7 +12,7 @@
 [ext_resource path="res://scenes/AirPlatform.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sprites/Ground/rock2.png" type="Texture" id=11]
 [ext_resource path="res://sprites/Ground/rock1.png" type="Texture" id=12]
-[ext_resource path="res://scenes/rope.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/sticky.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/cursor.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sprites/Ground/rock4.png" type="Texture" id=15]
 [ext_resource path="res://sprites/Ground/rock3.png" type="Texture" id=16]
@@ -120,9 +120,6 @@ position = Vector2( 1368, 275 )
 
 [node name="enemy_stump3" parent="enemys" instance=ExtResource( 2 )]
 position = Vector2( 935, 250 )
-
-[node name="Node2D" parent="." instance=ExtResource( 13 )]
-position = Vector2( 14, 257 )
 
 [node name="BackGround" type="Node2D" parent="."]
 
@@ -325,20 +322,63 @@ position = Vector2( 57, -124 )
 rotation = 0.785398
 shape = SubResource( 8 )
 
+[node name="sticky" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( 468.237, 190.231 )
+
+[node name="sticky2" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( -624.796, 379.697 )
+
+[node name="sticky8" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( -185.848, -82.7963 )
+
+[node name="sticky3" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( -487.324, 675.737 )
+rotation = -0.404916
+
+[node name="sticky4" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( -475.338, 970.903 )
+rotation = -0.404916
+
+[node name="sticky5" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( -609.436, 1021.1 )
+rotation = 3.24282
+
+[node name="sticky6" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( -521.786, 826.317 )
+rotation = 3.24282
+
+[node name="sticky7" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( -604.942, 570.106 )
+rotation = 3.24282
+
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="mushroom" parent="Objects" instance=ExtResource( 9 )]
-position = Vector2( 246.728, 347.379 )
+position = Vector2( 219.742, 344.204 )
 rotation = 0.867429
 
 [node name="mushroom4" parent="Objects" instance=ExtResource( 9 )]
 position = Vector2( -574, 1161 )
 
 [node name="mushroom3" parent="Objects" instance=ExtResource( 9 )]
-position = Vector2( 436, 323 )
+position = Vector2( 466.161, 204.739 )
+rotation = -0.722566
+
+[node name="mushroom5" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 241.543, 36.4741 )
+rotation = 3.17824
 
 [node name="mushroom2" parent="Objects" instance=ExtResource( 9 )]
 position = Vector2( 618, 132 )
+
+[node name="mushroom6" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 374.981, 326.247 )
+
+[node name="mushroom7" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( -100.126, 321.202 )
+
+[node name="mushroom8" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( -215.328, 112.659 )
 
 [node name="NJpen3" type="Sprite" parent="Objects"]
 position = Vector2( 205, -184 )

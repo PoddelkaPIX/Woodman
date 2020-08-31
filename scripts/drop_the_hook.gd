@@ -66,8 +66,7 @@ func _on_Timer_fall_of_the_axe_timeout():
 
 
 func _on_drop_the_hook_body_entered(body):
-	if not 'Player' in body.name and not 'hand' in body.name:
+	if 'sticky' in body.name:
 		stuck = true
-			
-	if 'enemy' in body.name:
-		body.health -= 4
+	else:
+		returnn = true
