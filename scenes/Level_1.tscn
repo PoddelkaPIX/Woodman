@@ -56,7 +56,7 @@ script = ExtResource( 4 )
 z_index = 7
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 309.836, 315.973 )
+position = Vector2( 733.7, 316.092 )
 collision_layer = 2147483649
 
 [node name="Area2D2" type="Area2D" parent="."]
@@ -119,7 +119,7 @@ position = Vector2( -239, 1164 )
 position = Vector2( 1368, 275 )
 
 [node name="enemy_stump3" parent="enemys" instance=ExtResource( 2 )]
-position = Vector2( 935, 250 )
+position = Vector2( 1061.84, 255.612 )
 
 [node name="BackGround" type="Node2D" parent="."]
 
@@ -344,11 +344,11 @@ position = Vector2( -609.436, 1021.1 )
 rotation = 3.24282
 
 [node name="sticky6" parent="Platforms" instance=ExtResource( 13 )]
-position = Vector2( -521.786, 826.317 )
-rotation = 3.24282
+position = Vector2( -523.888, 832.413 )
+rotation = 3.78387
 
 [node name="sticky7" parent="Platforms" instance=ExtResource( 13 )]
-position = Vector2( -604.942, 570.106 )
+position = Vector2( -605.363, 579.986 )
 rotation = 3.24282
 
 [node name="Objects" type="Node2D" parent="."]

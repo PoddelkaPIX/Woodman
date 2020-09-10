@@ -91,7 +91,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
 		spin = true
-		set_collision_mask(1)
+		set_collision_mask(3)
 	
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
 		direction = -1

@@ -425,8 +425,6 @@ position = Vector2( -1.68369, 8.14947 )
 
 [node name="Position_rope" type="Position2D" parent="."]
 position = Vector2( -1.68369, 8.14947 )
-
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
 [connection signal="timeout" from="Timers/ghost_trail" to="." method="_on_ghost_trail_timeout"]
 [connection signal="timeout" from="Timers/Timer_shot" to="." method="_on_Timer_shot_timeout"]
 [connection signal="timeout" from="Timers/looting_timer" to="." method="_on_looting_timer_timeout"]

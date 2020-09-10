@@ -18,6 +18,8 @@ var cd_toss = 1.5
 var jump = false
 var jump_speed = -200
 var attack_jump = false
+var attack = false
+
 func _physics_process(delta):
 	var pos = position
 	$Label.text = str(health) #отображение количества hp
@@ -43,12 +45,14 @@ func _physics_process(delta):
 		$RayCast_jump.position.x = abs($RayCast_jump.position.x)
 		$RayCast_jump.rotation_degrees = -90
 		$Area_attack/attack.position.x = abs($Area_attack/attack.position.x)
+		$StaticBody2D/CollisionShape2D.position.x = abs($StaticBody2D/CollisionShape2D.position.x)
 		$RayCast_opinion.rotation_degrees = -90
 		$stump.flip_h = true
 	else:
 		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x)
 		$RayCast_legs.position.x = abs($RayCast_legs.position.x) * -1
 		$Area_attack/attack.position.x = abs($Area_attack/attack.position.x) * -1
+		$StaticBody2D/CollisionShape2D.position.x = abs($StaticBody2D/CollisionShape2D.position.x) * -1
 		$RayCast_jump.position.x = abs($RayCast_jump.position.x) * -1
 		$RayCast_jump.rotation_degrees = 90
 		$RayCast_opinion.position.x = abs($RayCast_opinion.position.x) * -1
@@ -86,7 +90,7 @@ func animation():
 	var pl = get_parent().get_parent().get_player()
 	if velocity.y < 0:
 		$stump.play('jump')
-	elif position.distance_to(pl.position) < 30:
+	elif attack == true:
 		$stump.play('attack')
 		velocity.x = 0
 	else:
@@ -95,23 +99,26 @@ func animation():
 func search_for_target():
 	var pl = get_parent().get_parent().get_player()
 	
+	if position.distance_to(pl.position) < 30:
+		attack = true
 		
 	if position.distance_to(pl.position) < 20 or move == false:
 		velocity.x = 0
 		
 	elif position.distance_to(pl.position) <= 200:
-		target = pl
-		$RayCast_jump.enabled = true
-		$RayCast_opinion.enabled = false
-		$RayCast_legs.enabled = false
-		velocity = (pl.position - position)
-		if velocity.x > 0:
-			direction = 1
-		else:
-			direction = -1
+		print(position.y - pl.position.y)
+		if (position.y - pl.position.y) < 50 and (position.y - pl.position.y) > -50:
+			target = pl
+			$RayCast_jump.enabled = true
+			$RayCast_opinion.enabled = false
+			$RayCast_legs.enabled = false
+			velocity = (pl.position - position)
+			if velocity.x > 0:
+				direction = 1
+			else:
+				direction = -1
 			
-	elif position.distance_to(pl.position) >= 500:
-		velocity.x = 0
+	elif position.distance_to(pl.position) >= 800:
 		target = null
 		$RayCast_jump.enabled = false
 		$RayCast_opinion.enabled = true
@@ -138,6 +145,7 @@ func _on_Timer_fall_timeout():
 
 func _on_stump_animation_finished():
 	if $stump.animation == 'attack':
+		attack = false
 		$Area_attack/attack.disabled = false
 		$Timer_attack.start(0.2)
 		

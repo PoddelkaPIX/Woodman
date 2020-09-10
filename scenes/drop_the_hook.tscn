@@ -46,9 +46,5 @@ rotation = 0.279253
 scale = Vector2( 1, 0.2 )
 shape = SubResource( 3 )
 disabled = true
-
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2( 8.68626, 7.34991 )
-node_a = NodePath("..")
 [connection signal="body_entered" from="drop_the_hook" to="." method="_on_drop_the_hook_body_entered"]
 [connection signal="timeout" from="Timer_fall_of_the_axe" to="." method="_on_Timer_fall_of_the_axe_timeout"]
