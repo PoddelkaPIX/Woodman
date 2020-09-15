@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/поверхность.png-ac171e8ad6352790b417aef42580aac9.stex"
+path="res://.import/lipkaya.png-ca1917cd4ce7f67f32c7006cec8d154a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/поверхность.png"
-dest_files=[ "res://.import/поверхность.png-ac171e8ad6352790b417aef42580aac9.stex" ]
+source_file="res://sprites/lipkaya.png"
+dest_files=[ "res://.import/lipkaya.png-ca1917cd4ce7f67f32c7006cec8d154a.stex" ]
 
 [params]
 

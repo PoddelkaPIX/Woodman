@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://sprites/поверхность.png" type="Texture" id=1]
+[ext_resource path="res://sprites/lipkaya.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 14.1159 )
+extents = Vector2( 8, 11 )
 
 [node name="sticky" type="StaticBody2D"]
 collision_layer = 17
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.93452, -2.29046 )
+position = Vector2( -1, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
