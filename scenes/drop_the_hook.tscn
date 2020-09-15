@@ -8,7 +8,7 @@
 colors = PoolColorArray( 0.627451, 0.627451, 0.627451, 0.0392157, 0.203922, 0.203922, 0.203922, 0.27451 )
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 2.21566
+radius = 4.17354
 height = 0.0
 
 [sub_resource type="CapsuleShape2D" id=3]
@@ -30,7 +30,6 @@ collision_layer = 2
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drop_the_hook"]
-position = Vector2( 9.08663, 6.8795 )
 shape = SubResource( 2 )
 
 [node name="axe" type="Sprite" parent="."]

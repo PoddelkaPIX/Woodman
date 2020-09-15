@@ -11,6 +11,7 @@ var gravity = 5
 var speed_limit = 225 #ограничение по скорости игрока
 var velocity = Vector2()
 var direction = 1
+var invulnerability = false
 var spin = false
 var jump = false
 var kick = false
@@ -92,6 +93,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_down") and cd_spin <= 0 and attack == false:
 		spin = true
 		set_collision_mask(3)
+		invulnerability = true
 	
 	elif Input.is_action_pressed("ui_left") and spin == false and turn:
 		direction = -1
@@ -144,6 +146,8 @@ func timer_shot():
 	$Timers/Timer_shot.start(0.3)
 
 func hit():
+	if invulnerability == false:
+		heath -= 1
 	velocity.y = - 50
 
 func twisting(): #скручивание
@@ -209,15 +213,18 @@ func animation():
 		velocity.x = 0
 	
 	Anim.play(anim)
-
+	
+func invulnerability(): #неуязвимость
+	invulnerability = false
+	set_collision_mask(5)
+	
 #функции окончания проигрывания анимаций
 func _kick_end():
 	turn = true
 	cd_attack = 0.2
 	kick = false
-
+	
 func _spin_end():
-	set_collision_mask(5)
 	spin = false
 	cd_spin = 1
 	if is_on_floor():

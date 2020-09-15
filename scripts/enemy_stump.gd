@@ -23,11 +23,13 @@ var attack = false
 func _physics_process(delta):
 	var pos = position
 	$Label.text = str(health) #отображение количества hp
-		
+	if target == null:
+		$RayCast_legs.enabled = true
+		$RayCast_opinion.enabled = true
 	if health <= 0: #проверка количества hp
 		queue_free()
 		
-	elif is_alive == true and is_on_floor() and target == null and move: #обычное состояние вне битвы
+	elif is_alive == true and is_on_floor() and target == null: #обычное состояние вне битвы
 		velocity.x = direction * SPEED
 		
 		if $RayCast_opinion.is_colliding():
@@ -39,7 +41,7 @@ func _physics_process(delta):
 			
 # Управляет шейпами и лучами в зависимости от направления их взгляда
 	if direction == 1:
-		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x) * -1
+		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x)
 		$RayCast_legs.position.x = abs($RayCast_legs.position.x)
 		$RayCast_opinion.position.x = abs($RayCast_opinion.position.x)
 		$RayCast_jump.position.x = abs($RayCast_jump.position.x)
@@ -49,7 +51,7 @@ func _physics_process(delta):
 		$RayCast_opinion.rotation_degrees = -90
 		$stump.flip_h = true
 	else:
-		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x)
+		$enemy_hitBox.position.x = abs($enemy_hitBox.position.x) * -1
 		$RayCast_legs.position.x = abs($RayCast_legs.position.x) * -1
 		$Area_attack/attack.position.x = abs($Area_attack/attack.position.x) * -1
 		$StaticBody2D/CollisionShape2D.position.x = abs($StaticBody2D/CollisionShape2D.position.x) * -1
@@ -72,12 +74,17 @@ func attack_jump():
 	if attack_jump == true:
 		velocity.y = -50
 		$Timer_attack_jump.start(1)
-			
+		
+func turn(): #порот
+	direction *= -1
+	
 func jump():
 	var pl = get_parent().get_parent().get_player()
-	if $RayCast_jump.is_colliding() and position.distance_to(pl.position) > 100:
+	if $RayCast_jump.is_colliding() and position.distance_to(pl.position) > 100 and is_on_floor():
 		jump = true
-		$Timer_fall.start(0.2)
+		$RayCast_jump.enabled = true
+		$Timer_fall.start(0.3)
+	
 		
 	if jump == true:
 		velocity.y = jump_speed
@@ -86,44 +93,47 @@ func jump():
 	elif jump == false:
 		jump_speed = -200
 		velocity.y += GRAVITY
+		
 func animation():
 	var pl = get_parent().get_parent().get_player()
 	if velocity.y < 0:
 		$stump.play('jump')
 	elif attack == true:
 		$stump.play('attack')
-		velocity.x = 0
+	elif position.distance_to(pl.position) <= 200:
+		$stump.play('run')
 	else:
-		$stump.play('run')		
+		$stump.play('walk')
 		
 func search_for_target():
 	var pl = get_parent().get_parent().get_player()
 	
-	if position.distance_to(pl.position) < 30:
+	if position.distance_to(pl.position) < 80:
 		attack = true
 		
 	if position.distance_to(pl.position) < 20 or move == false:
 		velocity.x = 0
 		
 	elif position.distance_to(pl.position) <= 200:
-		print(position.y - pl.position.y)
-		if (position.y - pl.position.y) < 50 and (position.y - pl.position.y) > -50:
+		if (position.y - pl.position.y) < 80 and (position.y - pl.position.y) > -80:
 			target = pl
 			$RayCast_jump.enabled = true
 			$RayCast_opinion.enabled = false
 			$RayCast_legs.enabled = false
-			velocity = (pl.position - position)
+			if int(pl.position.x - position.x) > 0:
+				velocity.x = SPEED * 4
+			else:
+				velocity.x = - SPEED * 4
+				
 			if velocity.x > 0:
 				direction = 1
 			else:
 				direction = -1
-			
-	elif position.distance_to(pl.position) >= 800:
+	elif position.distance_to(pl.position) >= 400:
 		target = null
 		$RayCast_jump.enabled = false
 		$RayCast_opinion.enabled = true
 		$RayCast_legs.enabled = true
-		
 	if toss == true:
 		velocity.y = -10
 	else:
@@ -131,7 +141,6 @@ func search_for_target():
 
 func _on_Area_attack_body_entered(body):
 	if 'Player' in body.name:
-		body.heath -= 1
 		body.hit()
 		$Area_attack/attack.disabled = true
 		
@@ -140,6 +149,7 @@ func _on_Timer_attack_timeout():
 	$Area_attack/attack.disabled = true
 
 func _on_Timer_fall_timeout():
+	$RayCast_jump.enabled = false
 	jump = false
 
 

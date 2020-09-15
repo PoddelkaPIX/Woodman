@@ -16,17 +16,17 @@ func _physics_process(delta):
 	rotate(rotate_num)
 		
 	if oneshot == true:
-		velocity = ((G.mouse_position - position).normalized() * speed) * delta
+		velocity = ((G.mouse_position - position).normalized() * (speed + 100)) * delta
 		$Timer_fall_of_the_axe.start(0.3)
 		oneshot = false
 		
-	if position.distance_to(G.player_position) > 150:
+	if position.distance_to(G.player_position) > 180:
 		returnn = true 
 		
 	if returnn == true:
 		if speed <= 1000:
 			speed += 25
-		velocity = ((G.player_position - position).normalized() * speed) * delta
+		velocity = ((G.player_position - position).normalized() * (speed - 100)) * delta
 	
 	if position.distance_to(G.player_position) <= 10 and returnn == true:
 		get_parent().get_player().shells += 1

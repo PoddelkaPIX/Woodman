@@ -274,9 +274,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.65 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.45, 0.65 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "invulnerability"
+}, {
 "args": [  ],
 "method": "_spin_end"
 } ]
@@ -403,7 +406,7 @@ script = SubResource( 3 )
 texture = ExtResource( 13 )
 vframes = 7
 hframes = 17
-frame = 110
+frame = 21
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RunAttack = SubResource( 4 )

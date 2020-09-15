@@ -215,6 +215,10 @@ position = Vector2( -767, 172 )
 position = Vector2( 1562, 50 )
 rotation = 3.14159
 
+[node name="BockPlat5" parent="Platforms" instance=ExtResource( 24 )]
+position = Vector2( 1454.97, 418.654 )
+rotation = 3.14159
+
 [node name="BockPlat4" parent="Platforms" instance=ExtResource( 24 )]
 position = Vector2( 807, 940 )
 rotation = 3.14159
@@ -330,6 +334,9 @@ position = Vector2( -624.796, 379.697 )
 
 [node name="sticky8" parent="Platforms" instance=ExtResource( 13 )]
 position = Vector2( -185.848, -82.7963 )
+
+[node name="sticky9" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( 1426.65, 111.163 )
 
 [node name="sticky3" parent="Platforms" instance=ExtResource( 13 )]
 position = Vector2( -487.324, 675.737 )
