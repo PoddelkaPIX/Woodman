@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy_stump.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://sprites/Ground/rock6.png" type="Texture" id=22]
 [ext_resource path="res://scenes/AnglePlat.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scenes/BockPlat.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/enemy_stump_rework.tscn" type="PackedScene" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 106 )
@@ -56,7 +57,7 @@ script = ExtResource( 4 )
 z_index = 7
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 837, 224 )
+position = Vector2( 985.419, 200.738 )
 collision_layer = 2147483649
 
 [node name="Area2D2" type="Area2D" parent="."]
@@ -91,6 +92,9 @@ __meta__ = {
 
 [node name="enemys" type="Node2D" parent="."]
 
+[node name="enemy_stump_rework" parent="enemys" instance=ExtResource( 25 )]
+position = Vector2( 1284.36, 254.78 )
+
 [node name="enemy_stump" parent="enemys" instance=ExtResource( 2 )]
 position = Vector2( 420, 1165 )
 
@@ -116,10 +120,10 @@ position = Vector2( -32, 1164 )
 position = Vector2( -239, 1164 )
 
 [node name="enemy_stump2" parent="enemys" instance=ExtResource( 2 )]
-position = Vector2( 1368, 275 )
+position = Vector2( 690.026, 336.472 )
 
 [node name="enemy_stump3" parent="enemys" instance=ExtResource( 2 )]
-position = Vector2( 1136, 269 )
+position = Vector2( 564.715, 139.709 )
 
 [node name="BackGround" type="Node2D" parent="."]
 
@@ -376,7 +380,7 @@ position = Vector2( 241.543, 36.4741 )
 rotation = 3.17824
 
 [node name="mushroom2" parent="Objects" instance=ExtResource( 9 )]
-position = Vector2( 618, 132 )
+position = Vector2( 640, 135 )
 
 [node name="mushroom6" parent="Objects" instance=ExtResource( 9 )]
 position = Vector2( 374.981, 326.247 )

@@ -64,17 +64,8 @@ func _physics_process(delta):
 	search_for_target() 
 	animation()
 	jump()
-	attack_jump()
 	velocity = move_and_slide(velocity, FLOOR)
-	
-func attack_jump():
-	if $RayCast_attack_jump.is_colliding():
-		print('11111')
-		attack_jump = true
-	if attack_jump == true:
-		velocity.y = -50
-		$Timer_attack_jump.start(1)
-		
+
 func turn(): #порот
 	direction *= -1
 	
@@ -84,7 +75,6 @@ func jump():
 		jump = true
 		$RayCast_jump.enabled = true
 		$Timer_fall.start(0.3)
-	
 		
 	if jump == true:
 		velocity.y = jump_speed
@@ -107,8 +97,7 @@ func animation():
 		
 func search_for_target():
 	var pl = get_parent().get_parent().get_player()
-	
-	if position.distance_to(pl.position) < 80:
+	if position.distance_to(pl.position) < 40:
 		attack = true
 		
 	if position.distance_to(pl.position) < 20 or move == false:
@@ -129,6 +118,8 @@ func search_for_target():
 				direction = 1
 			else:
 				direction = -1
+			if (position.y - pl.position.y) > 20 and position.distance_to(pl.position) == 0:
+				velocity.x = 0
 	elif position.distance_to(pl.position) >= 400:
 		target = null
 		$RayCast_jump.enabled = false

@@ -19,6 +19,7 @@ func _process(delta):
 	else:
 		$AnimatedSprite.play('idle')
 		
+		
 func _on_mushroom_body_entered(body):
 	if 'Player' in body.name and (body.velocity.y > 10 or body.velocity.y < -10):
 		jump = true
@@ -28,8 +29,6 @@ func _on_mushroom_body_entered(body):
 func _on_AnimatedSprite_animation_finished():
 	jump = false
 	toss = false
-
-
 
 
 func _on_Timer_timeout():

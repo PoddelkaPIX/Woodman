@@ -45,6 +45,7 @@ func _ready():
 func _physics_process(delta):
 	G.player_direction = direction #передаём в глобальную переменную сторону взгляда игрока
 	cd_spin -= 1 * delta
+	$Line2D.clear_points()
 	
 	if heath <= 0:
 		get_tree().reload_current_scene()
@@ -59,6 +60,13 @@ func _physics_process(delta):
 			$Camera2D.set_zoom(Vector2(camera_zoom_x, camera_zoom_y))
 		else:
 			zoom = false
+	if shells == 0:
+		$Line2D.add_point(Vector2(1, 1))
+		G.axe_position.y + 10
+		G.axe_position.x + 10
+		$Line2D.add_point(Vector2(G.axe_position - G.player_position))
+	else:
+		G.axe_position = global_position
 	#кнопочки
 	if Input.is_action_just_pressed("E_pressed"):
 		G.E_pressed = true
@@ -85,7 +93,6 @@ func _physics_process(delta):
 			var axe = AXE.instance()
 			axe.position = $Position_attack.global_position
 			get_parent().add_child(axe)
-	
 	elif Input.is_action_pressed("ui_down"):
 		if Input.is_action_pressed("ui_accept"):
 			$spin_attack/spin_attack_box.disabled = false
@@ -218,6 +225,8 @@ func invulnerability(): #неуязвимость
 	invulnerability = false
 	set_collision_mask(5)
 	
+func camera_hit(): #движение камеры при нанесении урона
+	pass
 #функции окончания проигрывания анимаций
 func _kick_end():
 	turn = true
@@ -240,22 +249,6 @@ func _jump_end():
 
 func _on_looting_timer_timeout(): #таймер выключающий нажатие на Е
 	G.E_pressed = false
-
-func _on_Area_Attack_body_entered(body): #свойства атаки
-	if 'enemy' in body.name:
-		velocity.x = 0
-		body.toss_attack = true
-		if G.axe_is_taken == false: #обычная атака без усиления
-			print('hit')
-			body.health -= 5
-		else: #атака с усилением
-			body.health -= 10
-
-func _on_Area_kick_body_entered(body): #свойства пинка
-	if 'enemy' in body.name:
-		body.toss = true
-		print('kick')
-		body.health -= 1
 
 func _on_gravity_timer_timeout():
 	gravity = 15

@@ -12,7 +12,7 @@ var player
 
 func _physics_process(delta):
 	player = get_parent().get_player()
-	G.axe_position = global_position
+	G.axe_position = position
 	rotate(rotate_num)
 		
 	if oneshot == true:
@@ -41,6 +41,7 @@ func _on_drop_the_axe_body_entered(body):
 		returnn = true
 			
 	if 'enemy' in body.name:
+		get_parent().get_player().camera_hit()
 		body.health -= 4
 
 func _on_Timer_fall_of_the_axe_timeout():

@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/enemy_stump_rework.gd" type="Script" id=1]
+[ext_resource path="res://sprites/stump/KRYSTAL_head_walk5.png" type="Texture" id=2]
+[ext_resource path="res://sprites/stump/KRYSTAL_head_walk2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/stump/KRYSTAL_head_walk1.png" type="Texture" id=4]
+[ext_resource path="res://sprites/stump/KRYSTAL_head_walk4.png" type="Texture" id=5]
+[ext_resource path="res://sprites/stump/KRYSTAL_head_walk3.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 14.9887 )
+
+[node name="enemy_stump_rework" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Anim" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+flip_h = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( -1.49831, 14.6085 )
+shape = SubResource( 2 )
+
+[node name="RayCast_floor" type="RayCast2D" parent="."]
+position = Vector2( 13.2975, 27.5314 )
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="RayCast_eyes" type="RayCast2D" parent="."]
+position = Vector2( 8.98984, 26.4077 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 20 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -20.6954
+margin_top = -16.4814
+margin_right = 19.3046
+margin_bottom = -2.48138
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="turn_timer" type="Timer" parent="Timers"]
+[connection signal="timeout" from="Timers/turn_timer" to="." method="_on_turn_timer_timeout"]

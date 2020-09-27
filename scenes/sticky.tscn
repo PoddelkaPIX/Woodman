@@ -6,8 +6,8 @@
 extents = Vector2( 8, 11 )
 
 [node name="sticky" type="StaticBody2D"]
-collision_layer = 17
-collision_mask = 5
+collision_layer = 18
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 0 )
