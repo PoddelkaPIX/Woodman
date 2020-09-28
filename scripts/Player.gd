@@ -62,9 +62,8 @@ func _physics_process(delta):
 			zoom = false
 	if shells == 0:
 		$Line2D.add_point(Vector2(1, 1))
-		G.axe_position.y + 10
-		G.axe_position.x + 10
-		$Line2D.add_point(Vector2(G.axe_position - G.player_position))
+		
+		$Line2D.add_point(Vector2((G.axe_position - G.player_position)))
 	else:
 		G.axe_position = global_position
 	#кнопочки

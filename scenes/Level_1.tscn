@@ -57,7 +57,7 @@ script = ExtResource( 4 )
 z_index = 7
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 985.419, 200.738 )
+position = Vector2( 966.593, 231.349 )
 collision_layer = 2147483649
 
 [node name="Area2D2" type="Area2D" parent="."]
@@ -93,7 +93,7 @@ __meta__ = {
 [node name="enemys" type="Node2D" parent="."]
 
 [node name="enemy_stump_rework" parent="enemys" instance=ExtResource( 25 )]
-position = Vector2( 1284.36, 254.78 )
+position = Vector2( 649.1, 324.068 )
 
 [node name="enemy_stump" parent="enemys" instance=ExtResource( 2 )]
 position = Vector2( 420, 1165 )
@@ -120,10 +120,10 @@ position = Vector2( -32, 1164 )
 position = Vector2( -239, 1164 )
 
 [node name="enemy_stump2" parent="enemys" instance=ExtResource( 2 )]
-position = Vector2( 690.026, 336.472 )
+position = Vector2( 165.586, -212.942 )
 
 [node name="enemy_stump3" parent="enemys" instance=ExtResource( 2 )]
-position = Vector2( 564.715, 139.709 )
+position = Vector2( 523.093, -217.053 )
 
 [node name="BackGround" type="Node2D" parent="."]
 
@@ -132,13 +132,19 @@ position = Vector2( 171, 180 )
 scale = Vector2( 2, 2 )
 z_index = -2
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="tree2" type="Sprite" parent="BackGround"]
-position = Vector2( 1281, 131 )
+position = Vector2( 1281, 138.568 )
 scale = Vector2( 2, 2 )
 z_index = -2
 texture = ExtResource( 3 )
 flip_h = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="tree3" type="Sprite" parent="BackGround"]
 position = Vector2( 396, 1018 )
@@ -148,8 +154,8 @@ texture = ExtResource( 3 )
 flip_h = true
 
 [node name="BG" type="Sprite" parent="BackGround"]
-position = Vector2( 460, 663 )
-scale = Vector2( 1.28912, 1.28912 )
+position = Vector2( 633.043, 61.4424 )
+scale = Vector2( 1.47726, 2.24757 )
 z_index = -3
 texture = ExtResource( 8 )
 __meta__ = {
@@ -360,6 +366,10 @@ rotation = 3.78387
 
 [node name="sticky7" parent="Platforms" instance=ExtResource( 13 )]
 position = Vector2( -605.363, 579.986 )
+rotation = 3.24282
+
+[node name="sticky10" parent="Platforms" instance=ExtResource( 13 )]
+position = Vector2( 717.823, 192.539 )
 rotation = 3.24282
 
 [node name="Objects" type="Node2D" parent="."]

@@ -10,9 +10,11 @@ var shells_twisting = 1
 var uncoupling = false #отцепление
 var player
 
+func _process(delta):
+	G.axe_position = global_position
+	
 func _physics_process(delta):
 	player = get_parent().get_player()
-	G.axe_position = position
 	rotate(rotate_num)
 		
 	if oneshot == true:

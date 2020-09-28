@@ -402,7 +402,6 @@ editor_draw_drag_margin = true
 texture = ExtResource( 13 )
 vframes = 7
 hframes = 17
-frame = 29
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RunAttack = SubResource( 3 )
@@ -420,9 +419,6 @@ anims/spin = SubResource( 14 )
 anims/spin_attack = SubResource( 15 )
 
 [node name="Position_attack" type="Position2D" parent="."]
-position = Vector2( -1.68369, 8.14947 )
-
-[node name="Position_rope" type="Position2D" parent="."]
 position = Vector2( -1.68369, 8.14947 )
 
 [node name="Line2D" type="Line2D" parent="."]
