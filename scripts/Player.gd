@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const AXE = preload("res://scenes/drop_the_axe.tscn")
 const HOOK = preload("res://scenes/drop_the_hook.tscn")
-const rope = preload("res://scenes/rope.tscn")
+
 const JUMP = 300
 const FLOOR = Vector2(0, -1)
 

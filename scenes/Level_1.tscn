@@ -57,7 +57,7 @@ script = ExtResource( 4 )
 z_index = 7
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 966.593, 231.349 )
+position = Vector2( 991.093, 219.349 )
 collision_layer = 2147483649
 
 [node name="Area2D2" type="Area2D" parent="."]

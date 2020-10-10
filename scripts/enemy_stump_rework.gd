@@ -3,7 +3,7 @@ extends KinematicBody2D
 const FLOOR = Vector2(0, -1)
 
 var direction = 1
-var gravity = 5
+var gravity = 10
 var velocity = Vector2()
 var speed = 60
 var max_speed = 90
@@ -53,11 +53,13 @@ func animations():
 		$Anim.play('jump')
 		
 func tracking():
+	var pl = get_parent().get_parent().get_player()
 	if target == null:
 		if not $RayCast_floor.is_colliding() and is_on_floor() or\
 			 $RayCast_eyes.is_colliding() and is_on_floor() and velocity.x != 0:
 				direction *= -1
-	if $RayCast_eyes.is_colliding() and target == 'player':
+	if $RayCast_eyes.is_colliding() and target == 'player'\
+	 and position.distance_to(pl.position) > 100:
 		$RayCast_eyes.enabled = false
 		if stop == false:
 			$Timers/Timer_stop.start(0.5)
@@ -77,7 +79,7 @@ func tracking():
 			
 func actions():
 	if jump == true:
-		velocity.y = - 160
+		velocity.y = - 180
 	if stop == true:
 		velocity.x = 0
 		
